@@ -30,10 +30,7 @@
          class="btn btn-info {{ strpos(URL::current(), 'admin/edit-profile') !== false ? 'hide' : '' }}">
         @lang('messages.edit_profile')
         </a>
-        <a href="{{route('res.barcode')}}"
-            class="btn btn-info {{ strpos(URL::current(), 'admin/show-barcode') !== false ? 'hide' : '' }}">
-            @lang('messages.barcode')
-        </a>
+       
         <a href="{{route('res.changePass')}}"
             class="btn btn-info {{ strpos(URL::current(), 'admin/change-password') !== false ? 'hide' : '' }}">
            @lang('messages.change_password')
@@ -57,8 +54,9 @@
           
               <div class="col-md-9">
                 
-   {!! Form::model($model, ['method'=>'post','action'=>['HomeController@updateProfile','files' => true]]) !!}
 
+   {!! Form::model($model, ['action'=>['HomeController@updateProfile'],'method'=>'post', 'enctype'
+            => 'multipart/form-data']) !!}
                 <div class="form-group">
                     @if (app()->getLocale() == 'ar')
                     {{Form::label('name_ar','اسم المطعم')}}

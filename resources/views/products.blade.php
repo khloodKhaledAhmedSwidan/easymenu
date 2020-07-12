@@ -29,8 +29,12 @@
         <div class="section-title">
             <ul class="breadcrumb">
                 <!--<li class="breadcrumb-item"><a href="{{route('restaurants',$user)}}"><i class="fa fa-home"></i></a></li>-->
-                <li class="breadcrumb-item"><a href="{{route('restaurants',$user)}}"><i class="fa fa-home"> الأقسام </i></a></li>
-                <li class="breadcrumb-item active">{{$products->first() ? $products->first()->category->name_ar : ''}}</li>
+                <li class="breadcrumb-item"><a href="{{route('restaurants',$user)}}"><i class="fa fa-home"> الأقسام </i></a></li> 
+                <li class="breadcrumb-item active">
+ 
+             {{$category->name_ar}}  
+ 
+                </li>
             </ul>
         </div>
 

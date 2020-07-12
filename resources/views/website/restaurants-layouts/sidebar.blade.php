@@ -36,6 +36,13 @@
                     </li>
                 </ul> --}}
             </li>
+            <li class="nav-item {{ strpos(URL::current(), 'admin/show-barcode') !== false ? 'active' : '' }}">
+                <a href="{{route('res.barcode')}}" class="nav-link ">
+                    <i class="icon-settings"></i>
+                    <span class="title">استعراض مطعمي</span>
+                    <span class="arrow"></span>
+                </a>
+            </li>
             <li class="nav-item {{ strpos(URL::current(), 'admin/cities') !== false ? 'active' : '' }}">
                 <a href="{{route('cities.index')}}" class="nav-link ">
                     <i class="icon-settings"></i>

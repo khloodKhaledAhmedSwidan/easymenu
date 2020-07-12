@@ -25,24 +25,6 @@
 
 <hr>
 
-<div class="row">
-    <div class="col-md-6 margin-auto">
-        <a href="{{route('res-update-info')}}"
-         class="btn btn-info {{ strpos(URL::current(), 'admin/edit-profile') !== false ? 'hide' : '' }}">
-        @lang('messages.edit_profile')
-        </a>
-        <a href="{{route('res.barcode')}}"
-            class="btn btn-info {{ strpos(URL::current(), 'admin/show-barcode') !== false ? 'hide' : '' }}">
-            @lang('messages.barcode')
-        </a>
-        <a href="{{route('res.changePass')}}"
-            class="btn btn-info {{ strpos(URL::current(), 'admin/change-password') !== false ? 'hide' : '' }}">
-           @lang('messages.change_password')
-        </a>
-    
-    </div>
-</div>
-
 <h1 class="page-title">@lang('messages.barcode') </h1>
 
 @endsection

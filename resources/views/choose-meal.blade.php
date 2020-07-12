@@ -70,7 +70,11 @@
       <ul class="breadcrumb">
           <!--<li class="breadcrumb-item"><a href="{{route('restaurants',$user)}}"><i class="fa fa-home"></i></a></li>-->
           <li class="breadcrumb-item"><a href="{{route('restaurants',$user)}}"><i class="fa fa-home"> الأقسام </i></a></li>
-          <li class="breadcrumb-item active">{{$meal->first() ? $meal->first()->category->name_ar : ''}}</li>
+          <li class="breadcrumb-item active">
+          <a href="{{route('cat-products',['user'=>$user,'id'=>$cat->id])}}">
+          {{$cat->name_ar }}
+          </a>
+          </li>
           <li class="breadcrumb-item active">{{$meal->first() ? $meal->name_ar : ''}}</li>
       </ul>
   </div>

@@ -163,22 +163,26 @@ class HomeController extends Controller
     }
 
     public function categoryProducts(User $user, $id)
-    {
+    { 
         $products = $user->meals()->where('category_id', $id)->get();
         $sizes = Size::all();
-        return view('products', compact('user', 'products'));
+    
+        $category = $user->categories()->where('id',$id)->first();
+        return view('products', compact('user', 'products','category'));
     }
 
     public function showProduct(User $user, $id)
     {
         $meal = Meal::find($id);
+        
         return view('product-details', compact('meal', 'user'));
     }
 
     public function chooseProduct(User $user, $id)
     {
-        $meal = Meal::find($id);
-        return view('choose-meal', compact('meal', 'user'));
+        $meal = Meal::findOrFail($id);
+        $cat = $meal->category;
+        return view('choose-meal', compact('meal', 'user','cat'));
     }
 
     public function postOrder(Request $request)
@@ -283,7 +287,7 @@ class HomeController extends Controller
     public function updateProfile(Request $request)
     {
         //|starts_with:966
-       dd($request->all());
+   
         $this->validate($request, [
             'name_ar' => 'required',
             'name' => 'required',
@@ -295,7 +299,7 @@ class HomeController extends Controller
             'minimum' => 'required',
             'delivery_from' => 'required',
             'delivery_to' => 'required',
-             'image' => 'mimes:jpeg,jpg,png,gif',
+             'image' => 'mimes:jpeg,jpg,png,gif|max:5000',
         ]);
 
 

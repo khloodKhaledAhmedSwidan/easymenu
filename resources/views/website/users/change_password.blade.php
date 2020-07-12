@@ -31,10 +31,7 @@
          class="btn btn-info {{ strpos(URL::current(), 'admin/edit-profile') !== false ? 'hide' : '' }}">
         @lang('messages.edit_profile')
         </a>
-        <a href="{{route('res.barcode')}}"
-            class="btn btn-info {{ strpos(URL::current(), 'admin/show-barcode') !== false ? 'hide' : '' }}">
-            @lang('messages.barcode')
-        </a>
+   
         <a href="{{route('res.changePass')}}"
             class="btn btn-info {{ strpos(URL::current(), 'admin/change-password') !== false ? 'hide' : '' }}">
            @lang('messages.change_password')
