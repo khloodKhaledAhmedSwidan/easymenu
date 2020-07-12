@@ -319,7 +319,7 @@
 
 
                             -->
-                    <input type="hidden" name="totalPrice" id="total-total" value="{{$cart->totalPrice- $deliveryPrice}}">
+                    <input type="hidden" name="totalPrice" id="total-total" value="{{$cart->totalPrice}}">
                     <input type="hidden" name="totalPriceBeforeVat" id="total-total" value="{{$cart->totalPrice -  ($cart->totalPrice * ($user->vat == null ? 0 : ($user->vat/100)))}}">
                     <input type="hidden" name="deliveryPrice" id="delivery-price" value="{{$user->delivery_price + ($user->delivery_price *($user->vat == null ? 0 : ($user->vat/100)))}}">
                     <input type="hidden" name="user_id" value="{{$user->id}}">
@@ -508,9 +508,10 @@
                 var totalBeforeDel = Number.parseFloat($("#total-price").text());
                 var deliveryPrice = Number.parseFloat($("#delivery_price").text());
                 var total = Number.parseFloat($("#total-total").val());
-                var totalAfterDel = total;
-                $("#total-price").text(totalAfterDel);
-                $("#lastTotalAfterAll").val(totalAfterDel);
+                alert(total);
+                // var totalAfterDel = total;
+                $("#total-price").text(total);
+                $("#lastTotalAfterAll").val(total);
 //                $("#branch-selection").show();
         $("#hide-all-location").hide();
             }
@@ -632,7 +633,7 @@
         console.log($del.val());
 
 
-{{--console.log($total.val() - {{$deliveryPrice}});--}}
+    {{--console.log($total.val() - {{$deliveryPrice}});--}}
         $cb1.on('change', function() {
             if ($cb1.val() == 0) {
                 $inadd1.style.display='block';
