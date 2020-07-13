@@ -58,34 +58,45 @@
 
                                         <div class="form-group">
                                             <label class="control-label"> هاتف الفرع </label>
-                                            <input type="text" name="phone" class="form-control"
-                                                placeholder="هاتف الفرع" value="{{$branch->phone}}" />
+                                            <input type="text" name="phone_number" class="form-control"
+                                                placeholder="هاتف الفرع" value="{{$branch->phone_number}}" />
                                             <strong> يجب ان يكون الهاتف بصيغة +96600000000</strong>
-                                            @if ($errors->has('phone'))
+                                            @if ($errors->has('phone_number'))
                                             <span class="help-block">
-                                                <strong style="color: red;">{{ $errors->first('phone') }}</strong>
+                                                <strong style="color: red;">{{ $errors->first('phone_number') }}</strong>
+                                            </span>
+                                            @endif
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label">  إيميل الفرع</label>
+                                            <input type="email" name="email" class="form-control"
+                                                placeholder="إيميل الفرع" value="{{$branch->email}}" />
+                                       
+                                            @if ($errors->has('email'))
+                                            <span class="help-block">
+                                                <strong style="color: red;">{{ $errors->first('email') }}</strong>
                                             </span>
                                             @endif
                                         </div>
 
                                         <div class="form-group">
-                                            <label class="control-label"> عنوان الفرع </label>
-                                            <input type="text" name="address_ar" class="form-control"
-                                                placeholder="أسم الفرع" value="{{$branch->address_ar}}" />
-                                            @if ($errors->has('address_ar'))
+                                            <label class="control-label"> اسم الفرع </label>
+                                            <input type="text" name="name_ar" class="form-control"
+                                                placeholder="أسم الفرع" value="{{$branch->name_ar}}" />
+                                            @if ($errors->has('name_ar'))
                                             <span class="help-block">
-                                                <strong style="color: red;">{{ $errors->first('address_ar') }}</strong>
+                                                <strong style="color: red;">{{ $errors->first('name_ar') }}</strong>
                                             </span>
                                             @endif
                                         </div>
 
                                         <div class="form-group">
-                                            <label class="control-label"> عنوان الفرع بالانجليزية</label>
-                                            <input type="text" name="address" class="form-control"
-                                                placeholder="أسم الفرع" value="{{$branch->address}}" />
-                                            @if ($errors->has('address'))
+                                            <label class="control-label"> اسم الفرع بالانجليزية</label>
+                                            <input type="text" name="name" class="form-control"
+                                                placeholder="أسم الفرع" value="{{$branch->name}}" />
+                                            @if ($errors->has('name'))
                                             <span class="help-block">
-                                                <strong style="color: red;">{{ $errors->first('address') }}</strong>
+                                                <strong style="color: red;">{{ $errors->first('name') }}</strong>
                                             </span>
                                             @endif
                                         </div>
@@ -103,7 +114,7 @@
                                         </div>
                                       <div class="form-group">
                                             <label for="password" class="control-label"> الرقم السري</label>
-                                            <input type="passeord" id="password" name="password" class="form-control" />
+                                            <input type="password" id="password" name="password" class="form-control" />
                                             @if ($errors->has('password'))
                                             <span class="help-block">
                                                 <strong style="color: red;">{{ $errors->first('password') }}</strong>
@@ -111,6 +122,16 @@
                                             @endif
                                         </div>
                                     </div>
+                                    <div class="form-group">
+                                            <label for="password_confirmation" class="control-label"> تاكيد الرقم السري</label>
+                                            <input type="password" id="password_confirmation" name="password_confirmation" class="form-control"
+                                                placeholder=" تاكيدالرقم السري " />
+                                            @if ($errors->has('password_confirmation'))
+                                            <span class="help-block">
+                                                <strong style="color: red;">{{ $errors->first('password_confirmation') }}</strong>
+                                            </span>
+                                            @endif
+                                        </div>
                                 </div>
                             </div>
                             <div class="margiv-top-10">

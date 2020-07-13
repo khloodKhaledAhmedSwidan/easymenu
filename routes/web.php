@@ -7,8 +7,8 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
     Route::get('/packages', 'HomeController@packages');
 
     Auth::routes();
-    Route::get('/login/{branch}', 'Auth\LoginController@showBranchLogin');
-     Route::post('/login/{branch}', 'Auth\LoginController@branchLogin'); 
+    // Route::get('/login/{branch}', 'Auth\LoginController@showBranchLogin');
+    //  Route::post('/login/{branch}', 'Auth\LoginController@branchLogin'); 
     Route::get('/get/meals/{cat_id}/{res_id}', function ($cat_id, $res_id) {
         $data = App\Meal::where('user_id', $res_id)->where('category_id', $cat_id)->get();
         return $data;
@@ -16,6 +16,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
 
     // Route::post('/search', 'HomeController@search')->name('search');
     Route::get('/restaurants/{user}', 'HomeController@index')->name('restaurants');
+    // Route::post('/restaurants/{user}','HomeController@branchMeals')->name('branch.meals');
     Route::get('/restaurants/{user}/categories/{id}', 'HomeController@categoryProducts')->name('cat-products');
     Route::get('/restaurants/{user}/products/{id}', 'HomeController@showProduct')->name('products.show');
     Route::get('/restaurants/{user}/meal/{id}', 'HomeController@chooseProduct')->name('choose-meal');
@@ -61,57 +62,62 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
  
         Route::group(['middleware' => ['web', 'auth:web']], function () {
 
-            Route::get('/edit-profile', 'HomeController@editProfile')->name('res-update-info');
-            Route::post('/update-profile', 'HomeController@updateProfile');
- 
-
-            // Route::get('/edit-profile', 'HomeController@editProfile')->name('res-update-info');
-            // Route::get('/orders/new', function(){dd('here');});
             Route::get('/orders/new', 'AdminController\OrderController@new')->name('orders.index');
             Route::get('/orders/active', 'AdminController\OrderController@activeOrders')->name('orders.active');
             Route::get('/orders/compeleted', 'AdminController\OrderController@compeletedOrders')->name('orders.compeleted');
             Route::get('/orders/canceled', 'AdminController\OrderController@canceledOrders')->name('orders.canceled');
             Route::get('/orders/{id}', 'AdminController\OrderController@showOrder')->name('orders.show');
+        
             Route::get('/orders/{id}/delete', 'AdminController\OrderController@deleteOrder')->name('orders.delete');
 
-
-
-
-        Route::get('/change-password', 'HomeController@changePasswordPage')->name('res.changePass');
-             Route::post('/change-password', 'HomeController@changePassword');
-            Route::get('/show-barcode', 'HomeController@barcodeRes')->name('res.barcode');
-            
-            route::get('cities/{id}/delete', 'AdminController\CityController@destroy');
-            Route::resource('cities', 'AdminController\CityController');
-
-            route::get('branches/{id}/delete', 'AdminController\BranchController@destroy');
-            Route::resource('branches', 'AdminController\BranchController');
-            
-      
-            
-            route::get('additions/{id}/delete', 'AdminController\AdditionController@destroy');
-            Route::resource('additions', 'AdminController\AdditionController');
-
-            route::get('categories/{id}/delete', 'AdminController\CategoryController@destroy');
-            Route::resource('categories', 'AdminController\CategoryController');
-
-            route::get('shifts/{id}/delete', 'AdminController\ShiftController@destroy');
-            Route::resource('shifts', 'AdminController\ShiftController');
-
-            route::get('sliders/{id}/delete', 'AdminController\SliderController@destroy');
-            Route::resource('sliders', 'AdminController\SliderController');
-
-            route::get('meals/{id}/delete', 'AdminController\MealController@destroy');
-            route::get('meals/{id}/add-size', 'AdminController\MealController@addSize')->name('meals.addSize');
-            route::post('meals/{id}/add-size', 'AdminController\MealController@storeSize')->name('meals.storeSize');
-            route::get('meals/{size_id}/edit-size', 'AdminController\MealController@editSize')->name('editSize');
-            route::post('meals/{size_id}/update-size', 'AdminController\MealController@updateSize')->name('updateSize');
-            route::get('meals/{meal_id}/{size_id}/delete-size', 'AdminController\MealController@deleteSize')->name('deleteSize');
-            Route::resource('meals', 'AdminController\MealController');
-
-            
             Route::get('bank/payments/edit/{id}', 'AdminController\HomeController@bank_payments_edit')->name('AdminEditBankPayment');
             Route::post('bank/payments/update/{id}', 'AdminController\HomeController@bank_payments_update')->name('AdminUpdateBankPayment');
+Route::group(['middleware'=>['restaurant']],function(){
+    Route::get('/edit-profile', 'HomeController@editProfile')->name('res-update-info');
+    Route::post('/update-profile', 'HomeController@updateProfile');
+
+
+    // Route::get('/edit-profile', 'HomeController@editProfile')->name('res-update-info');
+    // Route::get('/orders/new', function(){dd('here');});
+
+
+
+
+
+Route::get('/change-password', 'HomeController@changePasswordPage')->name('res.changePass');
+     Route::post('/change-password', 'HomeController@changePassword');
+    Route::get('/show-barcode', 'HomeController@barcodeRes')->name('res.barcode');
+    
+    route::get('cities/{id}/delete', 'AdminController\CityController@destroy');
+    Route::resource('cities', 'AdminController\CityController');
+
+    route::get('branches/{id}/delete', 'AdminController\BranchController@destroy');
+    Route::resource('branches', 'AdminController\BranchController');
+    
+
+    
+    route::get('additions/{id}/delete', 'AdminController\AdditionController@destroy');
+    Route::resource('additions', 'AdminController\AdditionController');
+
+    route::get('categories/{id}/delete', 'AdminController\CategoryController@destroy');
+    Route::resource('categories', 'AdminController\CategoryController');
+
+    route::get('shifts/{id}/delete', 'AdminController\ShiftController@destroy');
+    Route::resource('shifts', 'AdminController\ShiftController');
+
+    route::get('sliders/{id}/delete', 'AdminController\SliderController@destroy');
+    Route::resource('sliders', 'AdminController\SliderController');
+
+    route::get('meals/{id}/delete', 'AdminController\MealController@destroy');
+    route::get('meals/{id}/add-size', 'AdminController\MealController@addSize')->name('meals.addSize');
+    route::post('meals/{id}/add-size', 'AdminController\MealController@storeSize')->name('meals.storeSize');
+    route::get('meals/{size_id}/edit-size', 'AdminController\MealController@editSize')->name('editSize');
+    route::post('meals/{size_id}/update-size', 'AdminController\MealController@updateSize')->name('updateSize');
+    route::get('meals/{meal_id}/{size_id}/delete-size', 'AdminController\MealController@deleteSize')->name('deleteSize');
+    Route::resource('meals', 'AdminController\MealController');
+
+});
+           
         });
 
 

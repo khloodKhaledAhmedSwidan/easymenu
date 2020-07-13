@@ -32,6 +32,11 @@ class User extends Authenticatable
         'delivery_from',
         'delivery_to',
         'description',
+        'restaurant_id',
+        'type',
+        'address',
+        'address_ar',
+        'city_id',
     ];
 
     /**
@@ -70,7 +75,10 @@ class User extends Authenticatable
     {
         return $this->hasMany(Order::class);
     }
-
+    public function branchOrders()
+    {
+        return $this->hasMany(Order::class, 'branch_id');
+    }
     public function subscriptions()
     {
         return $this->hasMany(Subscription::class);
@@ -91,10 +99,10 @@ class User extends Authenticatable
         return $this->hasMany(Slider::class, 'restaurant_id');
     }
 
-    public function branches()
-    {
-        return $this->hasMany(Branch::class, 'user_id');
-    }
+    // public function branches()
+    // {
+    //     return $this->hasMany(Branch::class, 'user_id');
+    // }
 
     public function shifts()
     {
@@ -104,4 +112,16 @@ class User extends Authenticatable
 //        return asset('public/'.$image);
 //    }
 
+public function restaurantBranches()
+{
+    return $this->hasMany(User::class, 'restaurant_id');
+}
+public function user()
+{
+    return $this->belongsTo(User::class);
+}
+public function city()
+{
+    return $this->belongsTo(City::class);
+}
 }

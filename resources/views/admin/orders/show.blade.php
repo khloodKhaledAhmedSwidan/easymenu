@@ -20,7 +20,7 @@
 <div class="page-bar">
     <ul class="page-breadcrumb">
         <li>
-            <a href="{{ url('admin/home') }}">لوحة التحكم</a>
+            <a href="{{ url('home') }}">لوحة التحكم</a>
             <i class="fa fa-circle"></i>
         </li>
         <li>
@@ -77,7 +77,7 @@
                 <td class="no_dec">{{ $order->name }}</td>
                 <td class="no_dec">{{ $order->phone }}</td>
                 <td class="no_dec">{{ $order->user->name }}</td>
-                <td class="no_dec">{{ $order->branch->address_ar }}</td>
+                <td class="no_dec">{{ $order->branch->name_ar }}</td>
                 <td class="no_dec">
                     @if ($order->delivery == 0)
                     توصيل للعنوان

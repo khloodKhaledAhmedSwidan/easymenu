@@ -112,11 +112,6 @@
         'driver' => 'session',
         'provider' => 'admins',
       ),
-      'branch' => 
-      array (
-        'driver' => 'session',
-        'provider' => 'branches',
-      ),
       'api' => 
       array (
         'driver' => 'token',
@@ -130,11 +125,6 @@
       array (
         'driver' => 'eloquent',
         'model' => 'App\\User',
-      ),
-      'branches' => 
-      array (
-        'driver' => 'eloquent',
-        'model' => 'App\\Branch',
       ),
       'admins' => 
       array (

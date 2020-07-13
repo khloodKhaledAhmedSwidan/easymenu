@@ -56,6 +56,7 @@ class HomeController extends Controller
      */
     public function bank_payments_edit($id)
     {
+
         $bank = Order::findOrFail($id);
         return view('admin.payments.edit_bank_payment', compact('bank'));
     }

@@ -51,6 +51,8 @@ class HomeController extends Controller
             return view('welcome', compact('user', 'resActive'));
         }
         Session::forget('cart');
+        // $cities = $user->where('type',0)->cities()->pluck('name','id')->get();
+  
         return view('welcome', compact('user', 'resActive'));
     }
 
@@ -354,4 +356,7 @@ class HomeController extends Controller
        $model = auth()->user();
         return view('website.users.barcode', compact('model'));
     }
+//     public function branchMeals(Request $request, User $user){
+// dd($request->all());
+//     }
 }

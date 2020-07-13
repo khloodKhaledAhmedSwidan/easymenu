@@ -190,10 +190,12 @@
             $user = auth()->user();
             @endphp
             @auth
+            @if(auth()->user()->type == 0)
             <li>
                 <a class="btn btn-circle" target="_blank" style="text-decoration: none; color: #FF5722;"
                     href="{{url('restaurants/'.$user->name)}}"> استعراض مطعمي</a>
             </li>
+            @endif
             @endauth
 
             <!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->

@@ -3,9 +3,9 @@
 @php
 $meals = App\Meal::where('user_id',auth()->user()->id)->count();
 $orders = App\Order::where('user_id',auth()->user()->id)->count();
-$branches = App\Branch::where('user_id',auth()->user()->id)->count();
+$branches = App\User::where('restaurant_id',auth()->user()->id)->count();
 
-$varBranchs = auth()->user()->branches;
+$varBranchs = auth()->user()->restaurantBranches;
 @endphp
 
 @section('title')
@@ -83,10 +83,11 @@ $varBranchs = auth()->user()->branches;
             <div class="details">
                 <div class="number">
                     <span>
-                        {{$branch->orders->count()}}
+                    
+                        {{$branch->branchOrders->count()}}
                     </span>
                 </div>
-                <div class="desc"> عدد طلبات فرع : {{$branch->address_ar}} </div>
+                <div class="desc"> عدد طلبات فرع : {{$branch->name_ar}} </div>
             </div>
         </a>
     </div>

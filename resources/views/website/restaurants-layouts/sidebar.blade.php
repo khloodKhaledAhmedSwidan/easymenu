@@ -11,6 +11,7 @@
                     <span></span>
                 </div>
             </li>
+            @if(!auth()->user()->type == 1)
             <li class="nav-item start active open">
                 <a href="/home" class="nav-link ">
                     <i class="icon-home"></i>
@@ -20,7 +21,8 @@
             </li>
             <li class="heading">
                 <h3 class="uppercase">القائمة الجانبية</h3>
-            </li>
+            </li> 
+   
 
             <li class="nav-item {{ strpos(URL::current(), 'admin/edit-profile') !== false ? 'active' : '' }}">
                 <a href="{{route('res-update-info')}}" class="">
@@ -125,7 +127,8 @@
                 </ul> --}}
             </li>
 
-
+@endif
+@if(!auth()->user()->type == 0)
             <li class="nav-item {{ strpos(URL::current(), 'admin/orders') !== false ? 'active' : '' }}">
                 <a href="javascript:;" class="nav-link nav-toggle">
                     <i class="icon-settings"></i>
@@ -156,8 +159,8 @@
                 </ul>
             </li>
 
-
-
+@endif
+            @if(!auth()->user()->type == 1)
             <li class="nav-item {{ strpos(URL::current(), 'admin/sliders') !== false ? 'active' : '' }}">
                 <a href="{{route('sliders.index')}}" class="nav-link ">
                     <i class="icon-settings"></i>
@@ -188,7 +191,7 @@
                 </ul> --}}
             </li>
 
-
+            @endif
 
             {{--
             <li class="nav-item {{ strpos(URL::current(), 'admin/cities') !== false ? 'active' : '' }}">

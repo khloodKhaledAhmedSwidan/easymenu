@@ -52,11 +52,11 @@
 
                     </div>
                 </div>
-                <div class="row">
+                <!-- <div class="row">
                     <div class="text-center">
                         <h5>متاح لك {{$branchs}} فروع\فرع</h5>
                     </div>
-                </div>
+                </div> -->
                 <table class="table table-striped table-bordered table-hover table-checkable order-column"
                     id="sample_1">
                     <thead>
@@ -71,7 +71,7 @@
                         @foreach( $records as $record )
                         <tr class="odd gradeX">
                             <td>{{$loop->iteration}}</td>
-                            <td class="no_dec">{{ $record->address_ar }}</td>
+                            <td class="no_dec">{{ $record->name_ar}}</td>
                             <td>
 
                                 <div class="btn-group">
@@ -82,7 +82,7 @@
                                     <ul class="dropdown-menu pull-left" role="menu">
 
                                         <li>
-                                            <a href="{{ route('branches.edit',['id'=>$record]) }}">
+                                            <a href="{{ route('branches.edit',['id'=>$record->id]) }}">
                                                 <i class="icon-pencil"></i> تعديل
                                             </a>
                                         </li>

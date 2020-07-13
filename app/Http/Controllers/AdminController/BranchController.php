@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\AdminController;
 
 use App\Branch;
+use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -15,8 +16,8 @@ class BranchController extends Controller
      */
     public function index()
     {
-        $records = Branch::where('user_id', auth()->user()->id)->get();
-        $branchs = auth()->user()->branchs;
+        $records = User::where('restaurant_id', auth()->user()->id)->get();
+        $branchs = auth()->user()->restaurantBranches;
         return view('admin.branches.index', compact('records', 'branchs'));
     }
 
@@ -27,14 +28,14 @@ class BranchController extends Controller
      */
     public function create()
     {
-        $branchs = auth()->user()->branchs;
-        $created = auth()->user()->branches()->count();
-        if ($created < $branchs) {
+        $branchs = auth()->user()->branchOrders;
+        // $created = auth()->user()->branches()->count();
+        // if ($created < $branchs) {
             return view('admin.branches.create');
-        } else {
-            flash('لقد اضفت الحد الاقصي من الفروع')->error();
-            return back();
-        }
+        // } else {
+        //     flash('لقد اضفت الحد الاقصي من الفروع')->error();
+        //     return back();
+        // }
     }
 
     /**
@@ -44,25 +45,30 @@ class BranchController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
+    { 
+        //  dd($request->all());
         $rules = [
-            'phone' => 'required',
-            'address' => 'required',
-            'address_ar' => 'required',
+            'phone_number' => 'required',
+            'email' => 'required',
+            'name' => 'required',
+            'name_ar' => 'required',
             'city_id'=>'required',
-            'password'=>'required',
+            'password'=>'required|confirmed',
+            
         ];
         $this->validate($request, $rules);
         $res = auth()->user()->id;
+        User::create([
+        'phone_number' => $request->phone_number,
+        'email' => $request->email,
+        'name' => $request->name,
+        'name_ar' =>$request->name_ar,
+        'city_id' => $request->city_id,
+        'type' => 1 ,
+        'restaurant_id' => $res,
+        'password' => bcrypt($request->password),
+        ]);
 
-        $branch = new Branch;
-        $branch->phone = $request->phone;
-        $branch->address = $request->address;
-        $branch->address_ar = $request->address_ar;
-        $branch->city_id = $request->city_id;
-           $branch->user_id = $res;
-        $branch->password = bcrypt($request->password);
-      $branch->save();
         flash('تم اضافة الفرع');
         return redirect()->route('branches.index');
     }
@@ -84,8 +90,9 @@ class BranchController extends Controller
      * @param  \App\Branch  $branch
      * @return \Illuminate\Http\Response
      */
-    public function edit(Branch $branch)
+    public function edit($id)
     {
+  $branch = User::find($id);
         return view('admin.branches.edit', compact('branch'));
     }
 
@@ -96,22 +103,24 @@ class BranchController extends Controller
      * @param  \App\Branch  $branch
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Branch $branch)
+    public function update(Request $request, User $branch)
     {
         $rules = [
-            'phone' => 'required',
-            'address' => 'required',
-            'address_ar' => 'required',
-            'password' => 'required',
-              'city_id' => 'required',
+            'phone_number' => 'required',
+            'email' => 'email',
+            'name' => 'required',
+            'name_ar' => 'required',
+            'city_id'=>'required',
+            'password'=>'required|confirmed',
         ];
         $this->validate($request, $rules);
         $res = auth()->user();
         $branch->update($request->all());
+        $branch->type = 1 ;
         $branch->password = bcrypt($request->password);
         $branch->save();
         flash('تم تعديل الفرع');
-        return back();
+        return redirect()->route('branches.index');
     }
 
     /**
@@ -122,7 +131,8 @@ class BranchController extends Controller
      */
     public function destroy($id)
     {
-        $branch = Branch::find($id);
+    //   dd($id);
+        $branch = User::find($id);
         $branch->delete();
         flash('تم الحذف بنجاح');
         return back();
