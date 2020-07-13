@@ -15,7 +15,7 @@
 <div class="page-bar">
     <ul class="page-breadcrumb">
         <li>
-            <a href="{{ url('admin/home') }}">لوحة التحكم</a>
+            <a href="{{ url('home') }}">لوحة التحكم</a>
             <i class="fa fa-circle"></i>
         </li>
         <li>
