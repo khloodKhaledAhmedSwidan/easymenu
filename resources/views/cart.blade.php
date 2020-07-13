@@ -171,8 +171,8 @@
                     <span class="Amount__Quantity-gXjznF hLVzDN"> SR {{$priceAfterVat}}</span>
                 </div>
 
-                <div class="prependedcheckbox1">
-                    <div class="Amount__Wrapper-dterOW dEARJd " id="saturday"><span> قيمة التوصيل</span>
+                <div class="prependedcheckbox1" id="saturday">
+                    <div class="Amount__Wrapper-dterOW dEARJd " ><span> قيمة التوصيل</span>
                         <span class="Amount__Quantity-gXjznF hLVzDN"> SR {{$deliveryPrice}}</span>
                     </div>
                 </div>
@@ -611,7 +611,7 @@
             if (selected == 0) {
                 $(".hide-all-location").hide();
                 // console.log(selected);
-                    $inadd1.style.display='none';
+                    $inadd1.style.display='block';
                     $total.innerHTML = {{$totalPrice == null ? 0 : $totalPrice }};
             } else {
                 $(".hide-all-location").hide();
