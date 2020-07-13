@@ -171,8 +171,8 @@
                     <span class="Amount__Quantity-gXjznF hLVzDN"> SR {{$priceAfterVat}}</span>
                 </div>
 
-                <div class="prependedcheckbox1">
-                    <div class="Amount__Wrapper-dterOW dEARJd " id="saturday"><span> قيمة التوصيل</span>
+                <div class="prependedcheckbox1" id="saturday">
+                    <div class="Amount__Wrapper-dterOW dEARJd " ><span> قيمة التوصيل</span>
                         <span class="Amount__Quantity-gXjznF hLVzDN"> SR {{$deliveryPrice}}</span>
                     </div>
                 </div>
@@ -203,7 +203,7 @@
                         <div class="form-check">
                     <label class="form-check-label">
                                     <label class="radio">
-                                        <input type="radio"  name="delivery_status" checked value="0">
+                                        <input type="radio" id="checkbox2"  name="delivery_status"  value="0" checked="checked">
                                         <span class="checkmark"></span>
                                         @lang('messages.delivery')
                                     </label>
@@ -221,7 +221,7 @@
                         <div class="form-check">
                     <label class="form-check-label">
                                     <label class="radio">
-                                        <input type="radio" id="checkbox1" name="delivery_status" value="1" >
+                                        <input type="radio" id="checkbox1" name="delivery_status"  value="1" >
                                         <span class="checkmark"></span>
                                         @lang('messages.branch-del')
                                     </label>
@@ -230,7 +230,8 @@
 
 
                     </div>
-<div id="hide-all-location">
+                    
+<div class="hide-all-location">
                     <div class="form-group">
                       <label for="name">اختار المدينة</label>
                     <div class="total" id="city-selection">
@@ -254,11 +255,11 @@
                   </div>
 
                        
-<!--                           foreach($user->branches as $branch){
+                       {{-- foreach($user->branches as $branch){
                         if($branch->city_id === $user->cities()->id){
                         echo $branch;
                         }
-                        }    -->
+                        }     --}}
                         
                     <div class="form-group">
                       <label for="name">اختار الفرع</label>
@@ -278,6 +279,7 @@
                         @enderror
                     </div>
                   </div>
+                  
 </div>
 
 
@@ -319,7 +321,7 @@
 
 
                             -->
-                    <input type="hidden" name="totalPrice" id="total-total" value="{{$cart->totalPrice- $deliveryPrice}}">
+                    <input type="hidden" name="totalPrice" id="total-total" value="{{$cart->totalPrice - $user->delivery_price}}">
                     <input type="hidden" name="totalPriceBeforeVat" id="total-total" value="{{$cart->totalPrice -  ($cart->totalPrice * ($user->vat == null ? 0 : ($user->vat/100)))}}">
                     <input type="hidden" name="deliveryPrice" id="delivery-price" value="{{$user->delivery_price + ($user->delivery_price *($user->vat == null ? 0 : ($user->vat/100)))}}">
                     <input type="hidden" name="user_id" value="{{$user->id}}">
@@ -371,7 +373,7 @@
 
 
 
-                <div class="col-m-12">
+                <div class="col-m-12" class="hide-all-location">
                     <div class="content sections">
 
                         <div class="wrap-title d-flex justify-content-between mm">
@@ -484,40 +486,7 @@
             });
         });
     </script>
-<script>
-    window.onload = function() {
-        $(".hideThis").hide();
-        $("#lastTotalAfterAll").val(Number.parseFloat($("#total-total").val()));
-        $("input[name='delivery_status']").on('click', function() {
-            var selected = $("input[name='delivery_status']:checked").val();
-            if (selected == 0) {
-                // $("#branch-selection").hide();
-                $(".hideThis").show();
-                var vat = {{($user->vat == null ? 0 : ($user->vat / 100))}}
-                var totalBeforeDel = Number.parseFloat($("#total-price").text());
-                var deliveryPrice = Number.parseFloat($("#delivery-price").val());
-                var total = Number.parseFloat($("#total-total").val());
-                var totalAfterDel = total + deliveryPrice;
-                $("#total-price").text(totalAfterDel);
-                $("#lastTotalAfterAll").val(totalAfterDel);
-                // $("#total-total").val(totalAfterDel);
-                // $("#type2").attr("disabled",true);
-                // $("#type1").attr("disabled",true);
-            } else {
-                $(".hideThis").hide();
-                var totalBeforeDel = Number.parseFloat($("#total-price").text());
-                var deliveryPrice = Number.parseFloat($("#delivery_price").text());
-                var total = Number.parseFloat($("#total-total").val());
-                var totalAfterDel = total;
-                $("#total-price").text(totalAfterDel);
-                $("#lastTotalAfterAll").val(totalAfterDel);
-//                $("#branch-selection").show();
-        $("#hide-all-location").hide();
-            }
-        });
-    }
 
-</script>
 
 <script>
     function getLocation() {
@@ -620,33 +589,42 @@
     }
 
 </script>
+
 <script>
     $(function() {
 
         $inadd1 = document.getElementById('saturday');
         $total = document.getElementById('total');
+        $selected = $("input[name='delivery_status']");
         $del = $("#del");
-        $cb1 = $("#checkbox1");
+        $selectedVal = $("input[name='delivery_status']:checked").val();
+        // console.log($selectedVal);
         // $total = $("#total");
         {{--$del = {{$deliveryPrice}};--}}
-        console.log($del.val());
 
 
-{{--console.log($total.val() - {{$deliveryPrice}});--}}
-        $cb1.on('change', function() {
-            if ($cb1.val() == 0) {
-                $inadd1.style.display='block';
-                {{--$total.innerHTML -=  {{$deliveryPrice}};--}}
 
+        $(".hide-all-location").hide();
+
+        $("input[name='delivery_status']").on('click', function() {
+            var selected = $("input[name='delivery_status']:checked").val();
+            if (selected == 0) {
+                $(".hide-all-location").hide();
+                // console.log(selected);
+                    $inadd1.style.display='block';
+                    $total.innerHTML = {{$totalPrice == null ? 0 : $totalPrice }};
             } else {
+                $(".hide-all-location").hide();
                 $inadd1.style.display='none';
-                $total.innerHTML -=  $del.val();
-
+                    {{--$total.innerHTML -=  {{$deliveryPrice}};--}}
+                    $total.innerHTML = {{$totalPrice == null ? 0 : $totalPrice}} - $del.val();
+                    // console.log(selected);
             }
         });
 
     });
 </script>
+
 
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAFUMq5htfgLMNYvN4cuHvfGmhe8AwBeKU&callback=initMap" async defer></script>
 

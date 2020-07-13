@@ -96,6 +96,7 @@ class HomeController extends Controller
 
     public function getCart(User $user)
     {
+        // dd('im here');
         $start_at = $user->shifts()->orderBy('from', 'asc')->pluck('from')->first();
         $end_at = $user->shifts()->orderBy('from', 'desc')->pluck('to')->first();
         $now = Carbon::now()->format('H:i');
@@ -106,13 +107,17 @@ class HomeController extends Controller
 
         $oldCart = Session::get('cart');
         $cart = new Cart($oldCart);
+        
+        $totalPrice = $cart == null ?0 :$cart->totalPrice;
+
         if ($cart->items == null) {
-            return view('cart', compact('user', 'resActive'));
+            return view('cart', compact('user', 'resActive','totalPrice'));
         }
         if ($cart->restaurant_id != $user->id) {
             Session::forget('cart');
         }
         // dd($cart);
+
         $products = array_pluck($cart->items, 'item');
         $id = array_pluck($products, 'id');
         $vatPercentage =$user->vat;
@@ -123,7 +128,7 @@ class HomeController extends Controller
 
         $deliveryPrice=$user->delivery_price;
         $cart->totalPrice = $deliveryPrice + $priceAfterVat;
-        $totalPrice = $cart->totalPrice;
+        $totalPrice = $cart == null ?0 :$cart->totalPrice;
 
         $start_at = $user->shifts()->orderBy('from', 'asc')->pluck('from')->first();
         $end_at = $user->shifts()->orderBy('from', 'desc')->pluck('to')->first();
@@ -191,7 +196,7 @@ class HomeController extends Controller
     {
         $this->validate($request, [
             "delivery_status" => "required",
-            "branch_id" => "required",
+            "branch_id" => "nullable",
             "name" => "required",
             "phone" => "required",
             // "adderss" => "required_if:delivery_status,==,0",
@@ -213,8 +218,8 @@ class HomeController extends Controller
         if ($cart != null) {
             $order = Order::create([
                 'user_id'     => $request->user_id,
-                'branch_id'   => $request->branch_id == null ? 0 : $request->branch_id,
-                'total_price' => $request->delivery_status == 0 ? $request->totalPrice + $request->deliveryPrice : $request->totalPrice,
+                'branch_id'   => $request->branch_id == null ? null : $request->branch_id,
+                // 'total_price' => $request->delivery_status == 0 ? $request->totalPrice + $request->deliveryPrice : $request->totalPrice,
                 'delivery'    => $request->delivery_status,
                 'name'        => $request->name,
                 'phone'       => $request->phone,

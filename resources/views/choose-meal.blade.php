@@ -94,6 +94,19 @@
                         </h6>
                     </div>
                     <div class="row">
+
+                    <div class="col-12 col-md-12">
+                        <div class="form-check">
+                            <div class="form-check-label">
+                                <label class="radio">
+                                    <input type="radio" class="form-input" onchange="sizeOp({{$meal->id}},0,{{$meal->price}})" name="size_id" value="0" id="size-{{$meal->id}}-{{0}}" data-price="0">
+                                    <span class="checkmark"></span>
+                                    {{app()->getLocale() == 'ar' ? 'بدون احجام' : 'default size'}}-{{(0)}}
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
                         @foreach ($meal->sizes as $item)
 
                             <div class="col-12 col-md-12">

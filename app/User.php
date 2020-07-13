@@ -66,6 +66,12 @@ class User extends Authenticatable
     {
         return $this->hasMany(Meal::class);
     }
+
+    public function tables()
+    {
+        return $this->hasMany(Table::class);
+    }
+
     public function cities()
     {
         return $this->hasMany(City::class);
