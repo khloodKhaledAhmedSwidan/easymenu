@@ -17,7 +17,8 @@ class RedirectIfAuthenticated
      */
     public function handle($request, Closure $next, $guard = null)
     {
-      
+    
+        
         switch ($guard){
             case 'admin':
   
@@ -27,7 +28,6 @@ class RedirectIfAuthenticated
                 }
                 break;
   
-                break;
             default:
                 if (Auth::guard($guard)->check()){
             
