@@ -77,7 +77,7 @@ class UserController extends Controller
             [
                 'package_id' => 1,
             ]);
-
+        flash('تم اضافة بيانات المطعم');
         return redirect('admin/users');
     }
 
