@@ -82,8 +82,8 @@
                             <td><?php echo ++$i ?></td>
                             <td> {{$order->user->name}} </td>
                             <td> {{$order->package->name}} </td>
-                            <td> {{$order->seller_code }} </td>
-                            <td> {{$order->discount_code}} </td>
+                            <td> {{$order->sellerCode->name }} </td>
+                            <td> {{$order->coupon?$order->coupon->name:''}} </td>
                             <td> {{$order->price}} </td>
                             <td>
                                 @if ($order->invoice_id == null)
@@ -127,8 +127,8 @@
                             <td>
                                 @if ($order->invoice_id == null)
                                 تم التحويل تحويل بنكي
-                                <!--<a href="{{route('orders.update-status',$order->id)}}" class="btn btn-sm blue">-->
-                                <!--    <i class="icon-docs"></i> تغيير حالة المدفوعات البنكية</a>-->
+{{--                             <a href="{{route('orders.update-status',$order->id)}}" class="btn btn-sm blue">--}}
+{{--                           <i class="icon-docs"></i> تغيير حالة المدفوعات البنكية</a> --}}
                                 @else
                                 تم الدفع اون لاين
                                 @endif

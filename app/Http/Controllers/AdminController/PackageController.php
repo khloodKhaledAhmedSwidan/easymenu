@@ -26,7 +26,7 @@ class PackageController extends Controller
      */
     public function create()
     {
-        return view('admin.packages.create');
+//        return view('admin.packages.create');
     }
 
     /**
@@ -38,20 +38,20 @@ class PackageController extends Controller
     public function store(Request $request)
     {
         // dd($request->all());
-        $this->validate($request, [
-            "name"            => 'required',
-            "description"     => 'required',
-            "name_ar"            => 'required',
-            "description_ar"     => 'required',
-            // "pinned_shop_num" => 'required',
-            "duration"        => 'required',
-            "products"        => 'required',
-            // "pinned_products" => 'required',
-            "price"           => 'required'
-        ]);
-        Package::create($request->all());
-        flash('تم اضافة ' . $request->name . ' بنجاح ');
-        return back();
+//        $this->validate($request, [
+//            "name"            => 'required',
+//            "description"     => 'required',
+//            "name_ar"            => 'required',
+//            "description_ar"     => 'required',
+//            // "pinned_shop_num" => 'required',
+//            "duration"        => 'required',
+//            "products"        => 'required',
+//            // "pinned_products" => 'required',
+//            "price"           => 'required'
+//        ]);
+//        Package::create($request->all());
+//        flash('تم اضافة ' . $request->name . ' بنجاح ');
+//        return back();
     }
 
     /**
@@ -63,6 +63,7 @@ class PackageController extends Controller
     public function show(Package $package)
     {
         //
+  return  view('admin.packages.show',compact('package'));
     }
 
     /**
@@ -109,12 +110,12 @@ class PackageController extends Controller
      */
     public function destroy(Package $package)
     {
-        if ($package->subscriptions()->count() > 0) {
-            flash('لا يمكن حذف هذه الباقة يوجد مشتركين بها')->error();
-            return back();
-        }
-        $package->delete();
-        flash('تم الحذف بنجاح');
-        return back();
+//        if ($package->subscriptions()->count() > 0) {
+//            flash('لا يمكن حذف هذه الباقة يوجد مشتركين بها')->error();
+//            return back();
+//        }
+//        $package->delete();
+//        flash('تم الحذف بنجاح');
+//        return back();
     }
 }

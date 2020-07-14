@@ -105,17 +105,17 @@
                                             </span>
                                             @endif
                                         </div>
-                                        <div class="form-group">
-                                            <label class="control-label">عدد الفروع</label>
+{{--                                        <div class="form-group">--}}
+{{--                                            <label class="control-label">عدد الفروع</label>--}}
 
-                                            <input type="number" name="branchs" placeholder="عدد الفروع"
-                                                class="form-control" value="{{$user->branchs}}" />
-                                            @if ($errors->has('branchs'))
-                                            <span class="help-block">
-                                                <strong style="color: red;">{{ $errors->first('branchs') }}</strong>
-                                            </span>
-                                            @endif
-                                        </div>
+{{--                                            <input type="number" name="branchs" placeholder="عدد الفروع"--}}
+{{--                                                class="form-control" value="{{$user->branchs}}" />--}}
+{{--                                            @if ($errors->has('branchs'))--}}
+{{--                                            <span class="help-block">--}}
+{{--                                                <strong style="color: red;">{{ $errors->first('branchs') }}</strong>--}}
+{{--                                            </span>--}}
+{{--                                            @endif--}}
+{{--                                        </div>--}}
 
                                         {{-- <div class="form-body">
                                             <div class="form-group ">

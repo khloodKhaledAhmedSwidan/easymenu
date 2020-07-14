@@ -45,16 +45,16 @@ class BranchController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    { 
+    {
         //  dd($request->all());
         $rules = [
             'phone_number' => 'required',
-            'email' => 'required',
-            'name' => 'required',
-            'name_ar' => 'required',
+            'email' => 'required|unique:users',
+            'name' => 'required|unique:users',
+            'name_ar' => 'required|unique:users',
             'city_id'=>'required',
             'password'=>'required|confirmed',
-            
+
         ];
         $this->validate($request, $rules);
         $res = auth()->user()->id;
@@ -109,9 +109,9 @@ class BranchController extends Controller
         //'email' => 'unique:table,email_column_to_check,id_to_ignore'
         $this->validate($request,[
             'phone_number' => 'required',
-            'email' => 'email|unique:users,id,'.$branch->id,
-            'name' => 'required',
-            'name_ar' => 'required',
+            'email' => 'email|unique:users,email,'.$branch->id,
+            'name' => 'required|unique:users,id,'.$branch->id,
+            'name_ar' => 'required|unique:users,id,'.$branch->id,
             'city_id'=>'required',
             'password'=>'nullable|confirmed',
         ] );

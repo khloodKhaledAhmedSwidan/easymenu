@@ -83,8 +83,8 @@
                             <td><?php echo ++$i ?></td>
                             <td> {{$order->user->name}} </td>
                             <td> {{$order->package->name}} </td>
-                            <td> {{$order->seller_code }} </td>
-                            <td> {{$order->discount_code}} </td>
+                            <td> {{ $order->sellerCode?$order->sellerCode->name:""}} </td>
+                            <td> {{$order->coupon?$order->coupon->name:""}} </td>
                             <td> {{$order->price}} </td>
                             <td>
                                 @if ($order->invoice_id == null)

@@ -68,10 +68,11 @@
                             <th> الاسم</th>
                             {{-- <th>رقم الهاتف</th> --}}
                             <th>الايميل</th>
-                            <th>استعراض المطعم</th>
+                            <th> المطعم</th>
                             <th>التفعيل</th>
-                            <th>عدد الوجبات في المطعم</th>
-                            <th>عدد الطلبات في المطعم</th>
+                            <th> الوجبات</th>
+                            <th> الطلبات</th>
+                            <th>الباقة </th>
                             <th> العمليات </th>
                         </tr>
                     </thead>
@@ -104,7 +105,11 @@
 
                             <td>{{$user->meals == null ? 0 : $user->meals->count()}}</td>
                             <td>{{$user->orders == null ? 0 : $user->orders->count()}}</td>
+{{--                            {{ dd($user->subscriptions()->where('finished',0)->first()->sellerCode) }}--}}
+                            <td>
+                                {{$user->subscriptions()->where('finished',0)->first() != null ? $user->subscriptions()->where('finished',0)->first()->package->name_ar : "" }}
 
+                            </td>
                             <td>
                                 <div class="btn-group">
                                     <button class="btn btn-xs green dropdown-toggle" type="button"

@@ -41,26 +41,26 @@
             <div class="portlet-body">
                 <div class="table-toolbar">
                     <div class="row">
-                        <div class="col-lg-6">
-                            <div class="btn-group">
-                                <a class="btn sbold green" href="{{ route('packages.create') }}"> إضافة جديد
-                                    <i class="fa fa-plus"></i>
-                                </a>
-                            </div>
-                        </div>
-
+                        {{--    <div class="col-lg-6">
+                               <div class="btn-group">
+                                      <a class="btn sbold green" href="{{ route('packages.create') }}"> إضافة جديد
+                                          <i class="fa fa-plus"></i>
+                                      </a>
+                                  </div>
+                           </div>
+      --}}
                     </div>
                 </div>
                 <table class="table table-striped table-bordered table-hover table-checkable order-column"
                     id="sample_1">
                     <thead>
                         <tr>
-                            <th>
+             {{--              <th>
                                 <label class="mt-checkbox mt-checkbox-single mt-checkbox-outline">
                                     <input type="checkbox" class="group-checkable" data-set="#sample_1 .checkboxes" />
                                     <span></span>
                                 </label>
-                            </th>
+                            </th> --}}
                             <th>اسم الباقة</th>
                             <th>مدة الباقة بالشهور</th>
                             <th>سعر الباقة</th>
@@ -71,35 +71,43 @@
 
                         @foreach( $records as $record )
                         <tr class="odd gradeX">
-                            <td>
-                                <label class="mt-checkbox mt-checkbox-single mt-checkbox-outline">
-                                    <input type="checkbox" class="checkboxes" value="1" />
-                                    <span></span>
-                                </label>
-                            </td>
+                            {{--   <td>
+                                   <label class="mt-checkbox mt-checkbox-single mt-checkbox-outline">
+                                       <input type="checkbox" class="checkboxes" value="1" />
+                                       <span></span>
+                                   </label>
+                               </td> --}}
                             <td class="no_dec">{{ $record->name_ar }}</td>
                             <td class="no_dec">{{ $record->duration }}</td>
                             <td class="no_dec">{{ $record->price }}</td>
                             <td>
                                 <div class="btn-group">
-                                    <button class="btn btn-xs green dropdown-toggle" type="button"
-                                        data-toggle="dropdown" aria-expanded="false"> العمليات
-                                        <i class="fa fa-angle-down"></i>
+                                  {{--   <button class="btn btn-xs green dropdown-toggle" type="button"
+                                        data-toggle="dropdown" aria-expanded="false">
+
+
+
+                                   <i class="fa fa-angle-down"></i>
+                                    </button> --}}
+                                    <button class="btn btn-xs green dropdown-toggle" type="button">
+                                    <a href="{{ route('packages.show',$record->id) }}">
+                                        <i class="icon-pencil"></i> عرض
+                                    </a>
                                     </button>
-                                    <ul class="dropdown-menu pull-left" role="menu">
-                                        <li>
-                                            <a href="{{ route('packages.edit',['id'=>$record]) }}">
-                                                <i class="icon-pencil"></i> تعديل
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a class="delete_data" data="{{ $record->id }}"
-                                                data_name="{{ $record->name }}">
-                                                <i class="fa fa-times"></i> حذف
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
+                                    {{--    <ul class="dropdown-menu pull-left" role="menu">
+                                       <li>
+                                              <a href="{{ route('packages.edit',['id'=>$record]) }}">
+                                                  <i class="icon-pencil"></i> تعديل
+                                              </a>
+                                          </li>
+                                         <li>
+                                              <a class="delete_data" data="{{ $record->id }}"
+                                                  data_name="{{ $record->name }}">
+                                                  <i class="fa fa-times"></i> حذف
+                                              </a>
+                                          </li>
+                                    </ul> --}}
+                                </div> --
                             </td>
                         </tr>
                         @endforeach

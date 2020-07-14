@@ -8,7 +8,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
 
     Auth::routes();
     // Route::get('/login/{branch}', 'Auth\LoginController@showBranchLogin');
-    //  Route::post('/login/{branch}', 'Auth\LoginController@branchLogin'); 
+    //  Route::post('/login/{branch}', 'Auth\LoginController@branchLogin');
     Route::get('/get/meals/{cat_id}/{res_id}', function ($cat_id, $res_id) {
         $data = App\Meal::where('user_id', $res_id)->where('category_id', $cat_id)->get();
         return $data;
@@ -59,7 +59,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
 
 
 
- 
+
         Route::group(['middleware' => ['web', 'auth:web']], function () {
 
             Route::get('/orders/new', 'AdminController\OrderController@new')->name('orders.index');
@@ -67,7 +67,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
             Route::get('/orders/compeleted', 'AdminController\OrderController@compeletedOrders')->name('orders.compeleted');
             Route::get('/orders/canceled', 'AdminController\OrderController@canceledOrders')->name('orders.canceled');
             Route::get('/orders/{id}', 'AdminController\OrderController@showOrder')->name('orders.show');
-        
+
             Route::get('/orders/{id}/delete', 'AdminController\OrderController@deleteOrder')->name('orders.delete');
 
             Route::get('bank/payments/edit/{id}', 'AdminController\HomeController@bank_payments_edit')->name('AdminEditBankPayment');
@@ -87,15 +87,15 @@ Route::group(['middleware'=>['restaurant']],function(){
 Route::get('/change-password', 'HomeController@changePasswordPage')->name('res.changePass');
      Route::post('/change-password', 'HomeController@changePassword');
     Route::get('/show-barcode', 'HomeController@barcodeRes')->name('res.barcode');
-    
+
     route::get('cities/{id}/delete', 'AdminController\CityController@destroy');
     Route::resource('cities', 'AdminController\CityController');
 
     route::get('branches/{id}/delete', 'AdminController\BranchController@destroy');
     Route::resource('branches', 'AdminController\BranchController');
-    
 
-    
+
+
     route::get('additions/{id}/delete', 'AdminController\AdditionController@destroy');
     Route::resource('additions', 'AdminController\AdditionController');
 
@@ -117,7 +117,7 @@ Route::get('/change-password', 'HomeController@changePasswordPage')->name('res.c
     Route::resource('meals', 'AdminController\MealController');
 
 });
-           
+
         });
 
 
@@ -160,7 +160,7 @@ Route::get('/change-password', 'HomeController@changePasswordPage')->name('res.c
 
             // ================================packages====================================
             Route::get('/packages/{package}/delete', 'AdminController\PackageController@destroy');
-            Route::resource('packages', 'AdminController\PackageController');
+            Route::resource('packages', 'AdminController\PackageController')->except(['store','edit','update','destroy','create']);
 
             // ================================seller-code====================================
             Route::get('/seller-code/{id}/delete', 'AdminController\SellerCodeController@destroy');
@@ -186,7 +186,7 @@ Route::get('/change-password', 'HomeController@changePasswordPage')->name('res.c
 
             //        ===================================users============================================
 
-            Route::get('users', 'AdminController\UserController@index');
+            Route::get('users', 'AdminController\UserController@index')->name('users.index');
             Route::get('users/create', 'AdminController\UserController@create');
             Route::post('users/store', 'AdminController\UserController@store');
             Route::get('users/edit/{user}', 'AdminController\UserController@edit')->name('users.edit');

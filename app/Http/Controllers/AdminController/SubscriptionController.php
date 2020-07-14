@@ -47,7 +47,7 @@ class SubscriptionController extends Controller
             'status' => 1
         ]);
         flash('تم تعديل حالة الدفع بنجاح');
-        return back();
+        return redirect()->route('subscriptions.index');
     }
 
     /**

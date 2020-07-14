@@ -5,6 +5,8 @@ namespace App\Http\Controllers\AdminController;
 use App\City;
 
 use App\Http\Controllers\Controller;
+use App\Package;
+use App\Subscription;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -23,7 +25,11 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::where('type',0)->orderBy('id', 'desc')->get();
+        $users = User::where('type', 0)->orderBy('id', 'desc')->get();
+//      User::with(array('subscriptions'=>function($query){
+//            $query->select('id','seller_code_id');
+//        }))->get();
+
         return view('admin.users.index', compact('users'));
     }
 
@@ -40,39 +46,45 @@ class UserController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
         $this->validate($request, [
             // 'phone_number'          => 'required|unique:users',
-            'name'                  => 'required|max:255',
-            'name_ar'               => 'required|max:255',
-            'branchs'               => 'required',
-            'email'                 => 'required|unique:users',
-            'image'                 => 'nullable|mimes:jpeg,bmp,png,jpg|max:5000',
-            'password'              => 'required|string|min:6',
+            'name' => 'required|max:255|unique:users',
+            'name_ar' => 'required|max:255|unique:users',
+            'email' => 'required|unique:users',
+            'image' => 'nullable|mimes:jpeg,bmp,png,jpg|max:5000',
+            'password' => 'required|string|min:6',
             'password_confirmation' => 'required|same:password',
-            'active'                => 'nullable',
+            'active' => 'nullable',
+
         ]);
 
         $user = User::create([
-            'name_ar'         => $request->name_ar,
-            'name'            => $request->name,
-            'email'           => $request->email,
-            'branchs'         => $request->branchs,
-            'active'          => $request->active,
-            'password'        => Hash::make($request->password),
-            'image'           => $request->file('image') == null ? 'default.png' : UploadImage($request->file('image'), 'image', '/uploads/users'),
+            'name_ar' => $request->name_ar,
+            'name' => $request->name,
+            'email' => $request->email,
+            'active' => $request->active,
+            'password' => Hash::make($request->password),
+            'branchs'  => 0,
+            'image' => $request->file('image') == null ? 'default.png' : UploadImage($request->file('image'), 'image', '/uploads/users'),
         ]);
+
+        $user->subscriptions()->create(
+            [
+                'package_id' => 1,
+            ]);
 
         return redirect('admin/users');
     }
+
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -83,7 +95,7 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function edit(User $user)
@@ -94,29 +106,27 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'email'        => 'required|email|unique:users,email,' . $id,
-            'name'         => 'required|max:255',
-            'name_ar'         => 'required|max:255',
-            'branchs'         => 'required',
-            'image'        => 'nullable|mimes:jpeg,bmp,png,jpg|max:5000',
+            'email' => 'required|email|unique:users,email,' . $id,
+            'name' => 'required|max:255|unique:users,name,'.$id,
+
+            'image' => 'nullable|mimes:jpeg,bmp,png,jpg|max:5000',
         ]);
-        $users = User::find($id);
-        User::where('id', $id)->first()->update([
-            'email'            => $request->email,
-            'name'             => $request->name,
-            'branchs'          => $request->branchs,
-            'name_ar'          => $request->name_ar,
-            'image'            => $request->file('image') == null ? $users->image : UploadImage($request->file('image'), 'image', '/uploads/users'),
+       $users = User::find($id);
+        $users->where('id', $id)->first()->update([
+            'email' => $request->email,
+            'name' => $request->name,
+
+            'image' => $request->file('image') == null ? $users->image : UploadImage($request->file('image'), 'image', '/uploads/users'),
         ]);
         flash('تم تعديل بيانات المطعم');
-        return back();
+        return redirect()->route('users.index');
     }
 
     public function update_pass(Request $request, $id)
@@ -154,7 +164,7 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

@@ -102,7 +102,7 @@
                                             @endif
                                         </div>
 
-                                        <div class=" form-group">
+                                     {{--   <div class=" form-group">
                                             <label class="control-label">عدد الفروع</label>
                                             <input type="number" name="branchs" placeholder="عدد الفروع"
                                                 class="form-control" value="{{old('branchs')}}" />
@@ -111,7 +111,7 @@
                                                 <strong style="color: red;">{{ $errors->first('branchs') }}</strong>
                                             </span>
                                             @endif
-                                        </div>
+                                        </div> --}}
 
                                         <div class="form-group">
                                             <label class="control-label">كلمة المرور</label>
