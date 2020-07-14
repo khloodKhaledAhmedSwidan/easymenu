@@ -63,7 +63,9 @@ return redirect()->back();
     {
       
         $order = Order::find($id);
+
         $order_details = unserialize($order->cart_items);
+        // dd($order_details);
         return view('admin.orders.show', compact('order', 'order_details'));
     }
 

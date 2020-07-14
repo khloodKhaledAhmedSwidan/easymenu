@@ -79,7 +79,7 @@
                 <td class="no_dec">{{ $order->user->name }}</td>
                 <td class="no_dec">{{ $order->branch->name_ar }}</td>
                 <td class="no_dec">
-                    @if ($order->delivery == 0)
+                    @if ($order->delivery != null)
                     توصيل للعنوان
                     <button type="button" class="btn btn-primary" data-toggle="modal"
                         data-target="#exampleModal{{$order->id}}">
@@ -121,13 +121,15 @@
                             </div>
                         </div>
                     </div>
+                    @elseif($order->table_id != null)
+                    رقم الطاولة  : {{$order->table_id}}    
                     @else
                     استلام من الفرع
                     @endif
 
                 </td>
 
-                <td class="no_dec">{{ $order->total_price }}</td>
+                <td class="no_dec">{{ $order_details->totalPrice }}</td>
                 <td class="no_dec">{{$order->notes}}</td>
             </tr>
         </tbody>

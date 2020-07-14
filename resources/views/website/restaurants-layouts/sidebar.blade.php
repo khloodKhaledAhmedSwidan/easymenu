@@ -11,7 +11,7 @@
                     <span></span>
                 </div>
             </li>
-            @if(!auth()->user()->type == 1)
+@if(!auth()->user()->type == 1)
             <li class="nav-item start active open">
                 <a href="/home" class="nav-link ">
                     <i class="icon-home"></i>
@@ -126,6 +126,52 @@
                     </li>
                 </ul> --}}
             </li>
+            
+            <li class="nav-item {{ strpos(URL::current(), 'admin/tables') !== false ? 'active' : '' }}">
+                <a href="{{route('tables.index')}}" class="nav-link ">
+                    <i class="icon-settings"></i>
+                    <span class="title">الطاولات</span>
+                    <span class="arrow"></span>
+                </a>
+                {{-- <ul class="sub-menu">
+                    <li class="nav-item  ">
+                        <a href="" class="nav-link ">
+                            <span class="title"> كافة الاسليدر الاعلاني</span>
+                        </a>
+                    </li>
+                </ul> --}}
+            </li>
+
+            <li class="nav-item {{ strpos(URL::current(), 'admin/sliders') !== false ? 'active' : '' }}">
+                <a href="{{route('sliders.index')}}" class="nav-link ">
+                    <i class="icon-settings"></i>
+                    <span class="title">سليد الاعلاني</span>
+                    <span class="arrow"></span>
+                </a>
+                {{-- <ul class="sub-menu">
+                    <li class="nav-item  ">
+                        <a href="" class="nav-link ">
+                            <span class="title"> كافة الاسليدر الاعلاني</span>
+                        </a>
+                    </li>
+                </ul> --}}
+            </li>
+
+
+            <li class="nav-item {{ strpos(URL::current(), '/landpage') !== false ? 'active' : '' }}">
+                <a href="/landpage" class="nav-link ">
+                    <i class="icon-settings"></i>
+                    <span class="title">الاحصائيات</span>
+                    <span class="arrow"></span>
+                </a>
+                {{-- <ul class="sub-menu">
+                    <li class="nav-item  ">
+                        <a href="" class="nav-link ">
+                            <span class="title"> كافة الاحصائيات</span>
+                        </a>
+                    </li>
+                </ul> --}}
+            </li>
 
 @endif
 @if(!auth()->user()->type == 0)
@@ -160,38 +206,6 @@
             </li>
 
 @endif
-            @if(!auth()->user()->type == 1)
-            <li class="nav-item {{ strpos(URL::current(), 'admin/sliders') !== false ? 'active' : '' }}">
-                <a href="{{route('sliders.index')}}" class="nav-link ">
-                    <i class="icon-settings"></i>
-                    <span class="title">سليد الاعلاني</span>
-                    <span class="arrow"></span>
-                </a>
-                {{-- <ul class="sub-menu">
-                    <li class="nav-item  ">
-                        <a href="" class="nav-link ">
-                            <span class="title"> كافة الاسليدر الاعلاني</span>
-                        </a>
-                    </li>
-                </ul> --}}
-            </li>
-
-            <li class="nav-item {{ strpos(URL::current(), '/landpage') !== false ? 'active' : '' }}">
-                <a href="/landpage" class="nav-link ">
-                    <i class="icon-settings"></i>
-                    <span class="title">الاحصائيات</span>
-                    <span class="arrow"></span>
-                </a>
-                {{-- <ul class="sub-menu">
-                    <li class="nav-item  ">
-                        <a href="" class="nav-link ">
-                            <span class="title"> كافة الاحصائيات</span>
-                        </a>
-                    </li>
-                </ul> --}}
-            </li>
-
-            @endif
 
             {{--
             <li class="nav-item {{ strpos(URL::current(), 'admin/cities') !== false ? 'active' : '' }}">

@@ -186,6 +186,7 @@
             <form action="{{route('post-order')}}" method="POST">
                 @csrf
                 <div class="table-footer">
+                    @if ($table_id == null)
                     <div class="total">
 
                         <div class="wrap-title">
@@ -201,7 +202,7 @@
 
 
                         <div class="form-check">
-                    <label class="form-check-label">
+                        <label class="form-check-label">
                                     <label class="radio">
                                         <input type="radio" id="checkbox2"  name="delivery_status"  value="0" checked="checked">
                                         <span class="checkmark"></span>
@@ -219,7 +220,7 @@
                         @endif
 
                         <div class="form-check">
-                    <label class="form-check-label">
+                        <label class="form-check-label">
                                     <label class="radio">
                                         <input type="radio" id="checkbox1" name="delivery_status"  value="1" >
                                         <span class="checkmark"></span>
@@ -230,7 +231,7 @@
 
 
                     </div>
-                    
+                    @endif
 
 
 
@@ -321,8 +322,10 @@
                     @enderror
                 </div> --}}
 
-
+                {{-- {{dd($table_id)}} --}}
+                
                 <div id="hide-city">
+                    @if ($table_id == null)
                     <div class="form-group">
                       <label for="name">اختار المدينة</label>
                     <div class="total" id="city-selection">
@@ -346,24 +349,28 @@
                   </div>
                         
                     <div class="form-group">
-                      <label for="name">اختار الفرع</label>
-                    <div class="total" id="branch-selection">
-                        {{-- <span> @lang('messages.choose-branch') : </span> --}}
-                        <select class="form-control" name="branch_id" required>
-                            <option selected disabled>@lang('messages.choose-branch')</option>
-                        </select>
-                        @error('branch_id')
-                        <span class="help-block">
-                            <strong style="color: red;">
-                                {{ $errors->first('branch_id') }}
-                            </strong>
-                        </span>
-                        @enderror
-                    </div>
+                        <label for="name">اختار الفرع</label>
+                        <div class="total" id="branch-selection">
+                            {{-- <span> @lang('messages.choose-branch') : </span> --}}
+                            <select class="form-control" name="branch_id" required>
+                                <option selected disabled>@lang('messages.choose-branch')</option>
+                            </select>
+                            @error('branch_id')
+                            <span class="help-block">
+                                <strong style="color: red;">
+                                    {{ $errors->first('branch_id') }}
+                                </strong>
+                            </span>
+                            @enderror
+                        </div>
                   </div>
-                  
-</div>
+                  @endif
+                </div>
+    
+                {{-- {{dd($table_id)}} --}}
+
                 <div class="col-m-12 " id="hide-map">
+                    @if($table_id == null)
                     <div class="content sections">
 
                         <div class="wrap-title d-flex justify-content-between mm">
@@ -391,7 +398,7 @@
                 </div>
 
 
-
+                @endif
 
 
 
@@ -593,6 +600,7 @@
         console.log($map);
         $selected = $("input[name='delivery_status']");
         $del = $("#del");
+
         $selectedVal = $("input[name='delivery_status']:checked").val();
         // console.log($selectedVal);
         // $total = $("#total");

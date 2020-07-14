@@ -15,7 +15,9 @@ class TableController extends Controller
      */
     public function index()
     {
-        //
+        $id = auth()->user()->id;
+        $records = Table::where('user_id',$id)->get();
+        return view('admin.tables.index',compact('records'));
     }
 
     /**
@@ -25,7 +27,8 @@ class TableController extends Controller
      */
     public function create()
     {
-        //
+        $branches = auth()->user()->restaurantBranches()->pluck('name','id');
+        return view('admin.tables.create', compact('branches'));
     }
 
     /**
@@ -36,7 +39,18 @@ class TableController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // dd($request->all());
+        $this->validate($request,[
+            'name' => 'required',
+            'branch_id' => 'required',
+        ]);
+        $id = auth()->user()->id;
+        $table = Table::create($request->all());
+        $table->user_id = $id;
+        $table->save();
+        flash('تم اضافة الطاولة بنجاح')->success();
+        return redirect()->route('tables.index');
+        // dd($table);
     }
 
     /**
@@ -58,7 +72,9 @@ class TableController extends Controller
      */
     public function edit($id)
     {
-        //
+        $branches = auth()->user()->restaurantBranches()->pluck('name','id');
+        $table = Table::find($id);
+        return view('admin.tables.edit',compact('table','branches'));
     }
 
     /**
@@ -70,7 +86,17 @@ class TableController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request,[
+            'name' => 'required',
+            'branch_id' => 'required',
+        ]);
+        // $id = auth()->user()->id;
+        $table = Table::find($id);
+        $table->update($request->all());
+        // $table->user_id = $id;
+        // $table->save();
+        flash('تم تعديل الطاولة بنجاح')->success();
+        return redirect()->route('tables.index');
     }
 
     /**
@@ -81,6 +107,9 @@ class TableController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $table = Table::find($id);
+        $table->delete();
+        flash('تم حذف الطاولة ');
+        return back();
     }
 }
