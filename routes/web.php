@@ -15,13 +15,14 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
     });
 
     // Route::post('/search', 'HomeController@search')->name('search');
-    Route::get('/restaurants/{user}', 'HomeController@index')->name('restaurants');
+    Route::get('/restaurants/{user}/{table_id?}', 'HomeController@index')->name('restaurants');
     // Route::post('/restaurants/{user}','HomeController@branchMeals')->name('branch.meals');
     Route::get('/restaurants/{user}/categories/{id}', 'HomeController@categoryProducts')->name('cat-products');
     Route::get('/restaurants/{user}/products/{id}', 'HomeController@showProduct')->name('products.show');
     Route::get('/restaurants/{user}/meal/{id}', 'HomeController@chooseProduct')->name('choose-meal');
-    // Route::view('/restaurants/{user}/cart', 'cart');
-    Route::get('/restaurants/cart/{user}', 'HomeController@getCart')->name('get-cart');
+    
+    Route::get('/restaurant/cart/{user}', 'HomeController@getCart')->name('get-cart');
+    // Route::get('/restaurants/cart/{user}', 'HomeController@getCart')->name('get-cart');
     Route::post('/meal/{id}/add-to-cart', 'website\CartController@addToCart')->name('add-to-cart');
     Route::GET('/meal/{id}/delete-from-cart', 'website\CartController@remove')->name('cart.remove');
 
@@ -104,6 +105,9 @@ Route::get('/change-password', 'HomeController@changePasswordPage')->name('res.c
 
     route::get('shifts/{id}/delete', 'AdminController\ShiftController@destroy');
     Route::resource('shifts', 'AdminController\ShiftController');
+
+    route::get('tables/{id}/delete', 'AdminController\TableController@destroy');
+    Route::resource('tables', 'AdminController\TableController');
 
     route::get('sliders/{id}/delete', 'AdminController\SliderController@destroy');
     Route::resource('sliders', 'AdminController\SliderController');

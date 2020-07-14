@@ -9,6 +9,7 @@ use App\Meal;
 use App\Order;
 use App\User;
 use App\Size;
+use App\Table;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Hash;
@@ -31,9 +32,15 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index(User $user)
+    public function index(User $user,$table_id = null)
     {
-
+        if($table_id != null){
+            session()->put('table_id',$table_id);
+        }else{
+            session()->forget('table_id');
+            // dd('olea');
+        }
+        // dd(session()->get('table_id'));
         $start_at = $user->shifts()->orderBy('from', 'asc')->pluck('from')->first();
         $end_at = $user->shifts()->orderBy('from', 'desc')->pluck('to')->first();
         $now = Carbon::now()->format('H:i');
@@ -56,7 +63,7 @@ class HomeController extends Controller
         return view('welcome', compact('user', 'resActive'));
     }
 
-    // public function getCart(User $user)
+    // public function sgetCart(User $user)
     // {
     //     $start_at = $user->shifts()->orderBy('from', 'asc')->pluck('from')->first();
     //     $end_at = $user->shifts()->orderBy('from', 'desc')->pluck('to')->first();
@@ -96,7 +103,7 @@ class HomeController extends Controller
 
     public function getCart(User $user)
     {
-        // dd('im here');
+        // dd('i\'m here');
         $start_at = $user->shifts()->orderBy('from', 'asc')->pluck('from')->first();
         $end_at = $user->shifts()->orderBy('from', 'desc')->pluck('to')->first();
         $now = Carbon::now()->format('H:i');
@@ -115,6 +122,7 @@ class HomeController extends Controller
         }
         if ($cart->restaurant_id != $user->id) {
             Session::forget('cart');
+            // Session::forget('table_id');
         }
         // dd($cart);
 
@@ -138,11 +146,13 @@ class HomeController extends Controller
             $resActive = 1;
         }
 
+        $table_id = session()->get('table_id');
+
 
 //        dd($user);
 
         return view('cart', compact('user', 'products', 'totalPrice',
-                                    'cart', 'id', 'resActive',
+                                    'cart', 'id', 'resActive','table_id',
                                     'priceBeforeVat','vat','vatPercentage',
                                     'deliveryPrice','priceAfterVat','vatAddition'));
     }
@@ -195,7 +205,7 @@ class HomeController extends Controller
     public function postOrder(Request $request)
     {
         $this->validate($request, [
-            "delivery_status" => "required",
+            "delivery_status" => "required_if:table_id,==,null",
             "branch_id" => "nullable",
             "name" => "required",
             "phone" => "required",
@@ -204,6 +214,7 @@ class HomeController extends Controller
             "longitude" => "required_if:delivery_status,==,0",
         ]);
         $cart = Session::get('cart');
+        $table_id = Session::get('table_id');
         $user = User::find($request->user_id);
         $min = $user->minimum;
         if ($min  > $request->totalPrice)
@@ -229,6 +240,11 @@ class HomeController extends Controller
                 'cart_items'  => serialize($cart),
                 'status'      => '0',
             ]);
+            if($table_id != null){
+                $table = Table::find($table_id);
+                $branch = $table->branch->id;
+                $order->update(['table_id'=>$table_id,'branch_id'=>$branch]);
+            }
             // dd($order);
             $products = array_pluck($cart->items, 'item');
             $id = array_pluck($products, 'id');
@@ -238,6 +254,7 @@ class HomeController extends Controller
         $user = User::find($request->user_id);
          $phone = Branch::whereUser_id($user->id)->first()->phone;
         Session::forget('cart');
+        Session::forget('table_id');
         flash('تم استلام طلبك بنجاح رقم الطلب هو ' . $order->id . ' يمكنك التواصل مع المطعم من خلال هذا الرقم ' . $phone);
         return redirect()->back();
 
