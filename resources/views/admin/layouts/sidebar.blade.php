@@ -128,78 +128,93 @@
             </ul>
         </li>
 
-        {{--
-            <li class="nav-item {{ strpos(URL::current(), 'admin/cities') !== false ? 'active' : '' }}">
-        <a href="javascript:;" class="nav-link nav-toggle">
-            <i class="icon-settings"></i>
-            <span class="title">المدن</span>
-            <span class="arrow"></span>
-        </a>
-        <ul class="sub-menu">
-            <li class="nav-item  ">
-                <a href="/admin/cities" class="nav-link ">
-                    <span class="title"> كافة المدن</span>
+            <li class="nav-item {{ strpos(URL::current(), 'admin/setting') !== false ? 'active' : '' }}">
+                <a href="javascript:;" class="nav-link nav-toggle">
+                    <i class="icon-settings"></i>
+                    <span class="title">الاعدادات العامة</span>
+                    <span class="arrow"></span>
                 </a>
+                <ul class="sub-menu">
+                    <li class="nav-item  ">
+                        <a href="/admin/setting" class="nav-link ">
+                            <span class="title">اعدادات البنك</span>
+                        </a>
+                    </li>
+                </ul>
             </li>
-        </ul>
-        </li>
 
-
-
-        <li class="nav-item {{ strpos(URL::current(), 'admin/additions') !== false ? 'active' : '' }}">
+            {{--
+                <li class="nav-item {{ strpos(URL::current(), 'admin/cities') !== false ? 'active' : '' }}">
             <a href="javascript:;" class="nav-link nav-toggle">
                 <i class="icon-settings"></i>
-                <span class="title">الاضافات</span>
+                <span class="title">المدن</span>
                 <span class="arrow"></span>
             </a>
             <ul class="sub-menu">
                 <li class="nav-item  ">
-                    <a href="/admin/additions" class="nav-link ">
-                        <span class="title"> كافة الاضافات</span>
+                    <a href="/admin/cities" class="nav-link ">
+                        <span class="title"> كافة المدن</span>
                     </a>
                 </li>
             </ul>
-        </li>
+            </li>
 
-        <li class="nav-item {{ strpos(URL::current(), 'admin/shops') !== false ? 'active' : '' }}">
-            <a href="javascript:;" class="nav-link nav-toggle">
-                <i class="icon-settings"></i>
-                <span class="title">المحلات</span>
-                <span class="arrow"></span>
-            </a>
-            <ul class="sub-menu">
-                <li class="nav-item  ">
-                    <a href="/admin/shops" class="nav-link ">
-                        <span class="title"> كافة المحلات</span>
-                    </a>
-                </li>
-            </ul>
-        </li>
 
-        <li class="nav-item {{ strpos(URL::current(), 'admin/orders') !== false ? 'active' : '' }}">
-            <a href="javascript:;" class="nav-link nav-toggle">
-                <i class="icon-settings"></i>
-                <span class="title">الطلبات</span>
-                <span class="arrow"></span>
-            </a>
-            <ul class="sub-menu">
-                <li class="nav-item  ">
-                    <a href="/admin/orders" class="nav-link ">
-                        <span class="title">الطلبات الجديدة</span>
-                    </a>
-                </li>
-                <li class="nav-item  ">
-                    <a href="/admin/orders/paid" class="nav-link ">
-                        <span class="title">الطلبات المؤكدة</span>
-                    </a>
-                </li>
-                <li class="nav-item  ">
-                    <a href="/admin/orders/canceled" class="nav-link ">
-                        <span class="title">الطلبات الملغية</span>
-                    </a>
-                </li>
-            </ul>
-        </li> --}}
+
+            <li class="nav-item {{ strpos(URL::current(), 'admin/additions') !== false ? 'active' : '' }}">
+                <a href="javascript:;" class="nav-link nav-toggle">
+                    <i class="icon-settings"></i>
+                    <span class="title">الاضافات</span>
+                    <span class="arrow"></span>
+                </a>
+                <ul class="sub-menu">
+                    <li class="nav-item  ">
+                        <a href="/admin/additions" class="nav-link ">
+                            <span class="title"> كافة الاضافات</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+            <li class="nav-item {{ strpos(URL::current(), 'admin/shops') !== false ? 'active' : '' }}">
+                <a href="javascript:;" class="nav-link nav-toggle">
+                    <i class="icon-settings"></i>
+                    <span class="title">المحلات</span>
+                    <span class="arrow"></span>
+                </a>
+                <ul class="sub-menu">
+                    <li class="nav-item  ">
+                        <a href="/admin/shops" class="nav-link ">
+                            <span class="title"> كافة المحلات</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+            <li class="nav-item {{ strpos(URL::current(), 'admin/orders') !== false ? 'active' : '' }}">
+                <a href="javascript:;" class="nav-link nav-toggle">
+                    <i class="icon-settings"></i>
+                    <span class="title">الطلبات</span>
+                    <span class="arrow"></span>
+                </a>
+                <ul class="sub-menu">
+                    <li class="nav-item  ">
+                        <a href="/admin/orders" class="nav-link ">
+                            <span class="title">الطلبات الجديدة</span>
+                        </a>
+                    </li>
+                    <li class="nav-item  ">
+                        <a href="/admin/orders/paid" class="nav-link ">
+                            <span class="title">الطلبات المؤكدة</span>
+                        </a>
+                    </li>
+                    <li class="nav-item  ">
+                        <a href="/admin/orders/canceled" class="nav-link ">
+                            <span class="title">الطلبات الملغية</span>
+                        </a>
+                    </li>
+                </ul>
+            </li> --}}
 
         {{--
             <li class="nav-item {{ strpos(URL::current(), 'admin/news') !== false ? 'active' : '' }}">

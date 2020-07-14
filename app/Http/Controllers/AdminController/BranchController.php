@@ -105,19 +105,22 @@ class BranchController extends Controller
      */
     public function update(Request $request, User $branch)
     {
-        $rules = [
+        // dd($branch);
+        //'email' => 'unique:table,email_column_to_check,id_to_ignore'
+        $this->validate($request,[
             'phone_number' => 'required',
-            'email' => 'email',
+            'email' => 'email|unique:users,id,'.$branch->id,
             'name' => 'required',
             'name_ar' => 'required',
             'city_id'=>'required',
-            'password'=>'required|confirmed',
-        ];
-        $this->validate($request, $rules);
+            'password'=>'nullable|confirmed',
+        ] );
         $res = auth()->user();
-        $branch->update($request->all());
+        $branch->update($request->except('password'));
         $branch->type = 1 ;
-        $branch->password = bcrypt($request->password);
+        if($request->password != null){
+            $branch->password = bcrypt($request->password);
+        }
         $branch->save();
         flash('تم تعديل الفرع');
         return redirect()->route('branches.index');

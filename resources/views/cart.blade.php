@@ -231,56 +231,7 @@
 
                     </div>
                     
-<div class="hide-all-location">
-                    <div class="form-group">
-                      <label for="name">اختار المدينة</label>
-                    <div class="total" id="city-selection">
-                        {{-- <span> @lang('messages.choose-city') : </span> --}}
-                        <select class="form-control" name="city_id" required>
-                            <option selected disabled>@lang('messages.choose-city')</option>
 
-                            @foreach ($user->cities as $city)
-                            <option value="{{$city->id}}"  > {{$city->name}} </option>
-                                {{app()->getLocale() == 'ar'?$city->address_ar:$city->address}}</option>
-                            @endforeach
-                        </select>
-                        @error('city_id')
-                        <span class="help-block">
-                            <strong style="color: red;">
-                                {{ $errors->first('city_id') }}
-                            </strong>
-                        </span>
-                        @enderror
-                    </div>
-                  </div>
-
-                       
-                       {{-- foreach($user->branches as $branch){
-                        if($branch->city_id === $user->cities()->id){
-                        echo $branch;
-                        }
-                        }     --}}
-                        
-                    <div class="form-group">
-                      <label for="name">اختار الفرع</label>
-                    <div class="total" id="branch-selection">
-                        {{-- <span> @lang('messages.choose-branch') : </span> --}}
-                        <select class="form-control" name="branch_id" required>
-                            <option selected disabled>@lang('messages.choose-branch')</option>
-               
-                     
-                        </select>
-                        @error('branch_id')
-                        <span class="help-block">
-                            <strong style="color: red;">
-                                {{ $errors->first('branch_id') }}
-                            </strong>
-                        </span>
-                        @enderror
-                    </div>
-                  </div>
-                  
-</div>
 
 
 
@@ -371,9 +322,48 @@
                 </div> --}}
 
 
+                <div id="hide-city">
+                    <div class="form-group">
+                      <label for="name">اختار المدينة</label>
+                    <div class="total" id="city-selection">
+                        {{-- <span> @lang('messages.choose-city') : </span> --}}
+                        <select class="form-control" name="city_id" required>
+                            <option selected disabled>@lang('messages.choose-city')</option>
 
-
-                <div class="col-m-12" class="hide-all-location">
+                            @foreach ($user->cities as $city)
+                            <option value="{{$city->id}}"  > {{$city->name}} </option>
+                                {{app()->getLocale() == 'ar'?$city->address_ar:$city->address}}</option>
+                            @endforeach
+                        </select>
+                        @error('city_id')
+                        <span class="help-block">
+                            <strong style="color: red;">
+                                {{ $errors->first('city_id') }}
+                            </strong>
+                        </span>
+                        @enderror
+                    </div>
+                  </div>
+                        
+                    <div class="form-group">
+                      <label for="name">اختار الفرع</label>
+                    <div class="total" id="branch-selection">
+                        {{-- <span> @lang('messages.choose-branch') : </span> --}}
+                        <select class="form-control" name="branch_id" required>
+                            <option selected disabled>@lang('messages.choose-branch')</option>
+                        </select>
+                        @error('branch_id')
+                        <span class="help-block">
+                            <strong style="color: red;">
+                                {{ $errors->first('branch_id') }}
+                            </strong>
+                        </span>
+                        @enderror
+                    </div>
+                  </div>
+                  
+</div>
+                <div class="col-m-12 " id="hide-map">
                     <div class="content sections">
 
                         <div class="wrap-title d-flex justify-content-between mm">
@@ -595,6 +585,12 @@
 
         $inadd1 = document.getElementById('saturday');
         $total = document.getElementById('total');
+        
+        $city = document.getElementById('hide-city');
+        $map = document.getElementById('hide-map');
+        
+        console.log($city);
+        console.log($map);
         $selected = $("input[name='delivery_status']");
         $del = $("#del");
         $selectedVal = $("input[name='delivery_status']:checked").val();
@@ -603,18 +599,23 @@
         {{--$del = {{$deliveryPrice}};--}}
 
 
-
-        $(".hide-all-location").hide();
+        // $city.style.display='none';
+        // $map.style.display='block';
+        // $(".hide-all-location").hide();
 
         $("input[name='delivery_status']").on('click', function() {
             var selected = $("input[name='delivery_status']:checked").val();
             if (selected == 0) {
-                $(".hide-all-location").hide();
+                console.log($city);
+                console.log($map);
+                $city.style.display='none';
+                $map.style.display='block';
                 // console.log(selected);
                     $inadd1.style.display='block';
                     $total.innerHTML = {{$totalPrice == null ? 0 : $totalPrice }};
             } else {
-                $(".hide-all-location").hide();
+                $map.style.display='none';
+                $city.style.display='block';
                 $inadd1.style.display='none';
                     {{--$total.innerHTML -=  {{$deliveryPrice}};--}}
                     $total.innerHTML = {{$totalPrice == null ? 0 : $totalPrice}} - $del.val();
