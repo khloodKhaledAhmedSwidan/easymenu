@@ -36,9 +36,6 @@ class HomeController extends Controller
     {
         if($table_id != null){
             session()->put('table_id',$table_id);
-        }else{
-            session()->forget('table_id');
-            // dd('olea');
         }
         // dd(session()->get('table_id'));
         $start_at = $user->shifts()->orderBy('from', 'asc')->pluck('from')->first();

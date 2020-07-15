@@ -202,7 +202,7 @@
       'file' => 
       array (
         'driver' => 'file',
-        'path' => 'C:\\Users\\khloo\\easymenu\\storage\\framework/cache/data',
+        'path' => 'C:\\Users\\Nour\\Desktop\\easymenu\\storage\\framework/cache/data',
       ),
       'memcached' => 
       array (
@@ -374,19 +374,19 @@
       'local' => 
       array (
         'driver' => 'local',
-        'root' => 'C:\\Users\\khloo\\easymenu\\storage\\app',
+        'root' => 'C:\\Users\\Nour\\Desktop\\easymenu\\storage\\app',
       ),
       'public' => 
       array (
         'driver' => 'local',
-        'root' => 'C:\\Users\\khloo\\easymenu\\storage\\app/public',
+        'root' => 'C:\\Users\\Nour\\Desktop\\easymenu\\storage\\app/public',
         'url' => '/storage',
         'visibility' => 'public',
       ),
       'test' => 
       array (
         'driver' => 'local',
-        'root' => 'C:\\Users\\khloo\\easymenu\\storage\\app/public/uploads/qr-code',
+        'root' => 'C:\\Users\\Nour\\Desktop\\easymenu\\storage\\app/public/uploads/qr-code',
         'url' => '/storage',
         'visibility' => 'public',
       ),
@@ -469,13 +469,13 @@
       'single' => 
       array (
         'driver' => 'single',
-        'path' => 'C:\\Users\\khloo\\easymenu\\storage\\logs/laravel.log',
+        'path' => 'C:\\Users\\Nour\\Desktop\\easymenu\\storage\\logs/laravel.log',
         'level' => 'debug',
       ),
       'daily' => 
       array (
         'driver' => 'daily',
-        'path' => 'C:\\Users\\khloo\\easymenu\\storage\\logs/laravel.log',
+        'path' => 'C:\\Users\\Nour\\Desktop\\easymenu\\storage\\logs/laravel.log',
         'level' => 'debug',
         'days' => 14,
       ),
@@ -539,7 +539,7 @@
       'theme' => 'default',
       'paths' => 
       array (
-        0 => 'C:\\Users\\khloo\\easymenu\\resources\\views/vendor/mail',
+        0 => 'C:\\Users\\Nour\\Desktop\\easymenu\\resources\\views/vendor/mail',
       ),
     ),
     'log_channel' => NULL,
@@ -553,7 +553,7 @@
     'keywords' => '',
     'creator' => 'Abdulrahman tqnee.com',
     'display_mode' => 'fullpage',
-    'tempDir' => 'C:\\Users\\khloo\\easymenu\\../temp/',
+    'tempDir' => 'C:\\Users\\Nour\\Desktop\\easymenu\\../temp/',
   ),
   'queue' => 
   array (
@@ -643,7 +643,7 @@
     'lifetime' => '10080',
     'expire_on_close' => false,
     'encrypt' => false,
-    'files' => 'C:\\Users\\khloo\\easymenu\\storage\\framework/sessions',
+    'files' => 'C:\\Users\\Nour\\Desktop\\easymenu\\storage\\framework/sessions',
     'connection' => NULL,
     'table' => 'sessions',
     'store' => NULL,
@@ -663,9 +663,9 @@
   array (
     'paths' => 
     array (
-      0 => 'C:\\Users\\khloo\\easymenu\\resources\\views',
+      0 => 'C:\\Users\\Nour\\Desktop\\easymenu\\resources\\views',
     ),
-    'compiled' => 'C:\\Users\\khloo\\easymenu\\storage\\framework\\views',
+    'compiled' => 'C:\\Users\\Nour\\Desktop\\easymenu\\storage\\framework\\views',
   ),
   'dompdf' => 
   array (
@@ -673,10 +673,10 @@
     'orientation' => 'portrait',
     'defines' => 
     array (
-      'font_dir' => 'C:\\Users\\khloo\\easymenu\\storage\\fonts/',
-      'font_cache' => 'C:\\Users\\khloo\\easymenu\\storage\\fonts/',
-      'temp_dir' => 'C:\\Users\\khloo\\AppData\\Local\\Temp',
-      'chroot' => 'C:\\Users\\khloo\\easymenu',
+      'font_dir' => 'C:\\Users\\Nour\\Desktop\\easymenu\\storage\\fonts/',
+      'font_cache' => 'C:\\Users\\Nour\\Desktop\\easymenu\\storage\\fonts/',
+      'temp_dir' => 'C:\\Users\\Nour\\AppData\\Local\\Temp',
+      'chroot' => 'C:\\Users\\Nour\\Desktop\\easymenu',
       'enable_font_subsetting' => false,
       'pdf_backend' => 'CPDF',
       'default_media_type' => 'screen',
