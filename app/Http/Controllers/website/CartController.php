@@ -23,7 +23,7 @@ class CartController extends Controller
     {
         // dd($request->all());
         $user = User::find($request->user_id);
-
+//dd($request->all());
         // $this->validate($request, ["size_id" => "required"]);
         $meal = Meal::findOrFail($id);
         $oldCart = Session::has('cart') ? Session::get('cart') : null;

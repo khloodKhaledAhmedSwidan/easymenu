@@ -32,7 +32,7 @@ $varBranchs = auth()->user()->restaurantBranches;
 
 <div class="row">
     <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-        <a class="dashboard-stat dashboard-stat-v2 blue">
+        <a class="dashboard-stat dashboard-stat-v2 blue" href="{{route('branches.index')}}">
             <div class="visual">
                 <i class="fa fa-users"></i>
             </div>
@@ -46,7 +46,7 @@ $varBranchs = auth()->user()->restaurantBranches;
     </div>
 
     <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-        <a class="dashboard-stat dashboard-stat-v2 red">
+        <a class="dashboard-stat dashboard-stat-v2 red" href="{{route('meals.index')}}">
             <div class="visual">
                 <i class="fa fa-users"></i>
             </div>
@@ -60,18 +60,20 @@ $varBranchs = auth()->user()->restaurantBranches;
     </div>
 
     <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-        <a class="dashboard-stat dashboard-stat-v2 yellow">
+        <a class="dashboard-stat dashboard-stat-v2 yellow" >
             <div class="visual">
                 <i class="fa fa-users"></i>
             </div>
+
             <div class="details">
                 <div class="number">
-                    <span>{{$orders}}</span>
+                   <span>{{$orders}}</span>
                 </div>
-                <div class="desc"> عدد الطلبات</div>
+                 <div class="desc">   عدد الطلبات    </div>
             </div>
         </a>
     </div>
+
 
     @foreach ($varBranchs as $branch)
 
@@ -83,11 +85,11 @@ $varBranchs = auth()->user()->restaurantBranches;
             <div class="details">
                 <div class="number">
                     <span>
-                    
+
                         {{$branch->branchOrders->count()}}
                     </span>
                 </div>
-                <div class="desc"> عدد طلبات فرع : {{$branch->name_ar}} </div>
+             <div class="desc"> عدد طلبات فرع : {{$branch->name_ar}} </div>
             </div>
         </a>
     </div>

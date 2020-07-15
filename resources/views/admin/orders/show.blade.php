@@ -122,7 +122,7 @@
                         </div>
                     </div>
                     @elseif($order->table_id != null)
-                    رقم الطاولة  : {{$order->table_id}}    
+                    رقم الطاولة  : {{$order->table_id}}
                     @else
                     استلام من الفرع
                     @endif

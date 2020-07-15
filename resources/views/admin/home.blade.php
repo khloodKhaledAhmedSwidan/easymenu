@@ -65,7 +65,7 @@ $meals = App\Meal::count();
                 <div class="number">
                     <span>{{$orders}}</span>
                 </div>
-                <div class="desc"> الطلبات</div>
+              <div class="desc"> الطلبات</div>
             </div>
         </a>
     </div>
@@ -79,7 +79,7 @@ $meals = App\Meal::count();
                 <div class="number">
                     <span>{{$meals}}</span>
                 </div>
-                <div class="desc"> عدد الوجبات</div>
+                  <div class="desc"> عدد الوجبات</div>
             </div>
         </a>
     </div>

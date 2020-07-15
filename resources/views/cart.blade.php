@@ -170,14 +170,24 @@
                 <div class="Amount__Wrapper-dterOW dEARJd"><span> قيمة الطلب بعد الضريبة</span>
                     <span class="Amount__Quantity-gXjznF hLVzDN"> SR {{$priceAfterVat}}</span>
                 </div>
+@if($table_id != null)
 
-                <div class="prependedcheckbox1" id="saturday">
-                    <div class="Amount__Wrapper-dterOW dEARJd " ><span> قيمة التوصيل</span>
-                        <span class="Amount__Quantity-gXjznF hLVzDN"> SR {{$deliveryPrice}}</span>
+                @else
+                    <div class="prependedcheckbox1" id="saturday">
+                        <div class="Amount__Wrapper-dterOW dEARJd " ><span> قيمة التوصيل</span>
+                            <span class="Amount__Quantity-gXjznF hLVzDN"> SR {{$deliveryPrice}}</span>
+                        </div>
                     </div>
-                </div>
+     @endif
+
                 <div class="Amount__Wrapper-dterOW dEARJd"><span>المجموع </span>
-                    <span class="Amount__Quantity-gXjznF kWbUqE" id="total">{{$totalPrice}} </span>
+                    <span class="Amount__Quantity-gXjznF kWbUqE" id="total">
+                        @if($table_id != null)
+                        {{$totalPrice - $deliveryPrice}}
+                        @else
+                            {{$totalPrice}}
+                        @endif
+                    </span>
                     {{-- <span  id="total-price"></span> --}}
                 </div>
 
@@ -323,7 +333,7 @@
                 </div> --}}
 
                 {{-- {{dd($table_id)}} --}}
-                
+
                 <div id="hide-city">
                     @if ($table_id == null)
                     <div class="form-group">
@@ -347,7 +357,7 @@
                         @enderror
                     </div>
                   </div>
-                        
+
                     <div class="form-group">
                         <label for="name">اختار الفرع</label>
                         <div class="total" id="branch-selection">
@@ -366,7 +376,7 @@
                   </div>
                   @endif
                 </div>
-    
+
                 {{-- {{dd($table_id)}} --}}
 
                 <div class="col-m-12 " id="hide-map">
@@ -461,7 +471,7 @@
         $(document).ready(function () {
             $('select[name="city_id"]').on('change' , function () {
                 var city_id = $(this).val();
-          
+
                 if(city_id)
                 {
                     $.ajax({
@@ -477,7 +487,7 @@
                     });
                 }else{
                     $('select[name="city_id"]').empty();
-                   
+
                 }
 
             });
@@ -592,10 +602,10 @@
 
         $inadd1 = document.getElementById('saturday');
         $total = document.getElementById('total');
-        
+
         $city = document.getElementById('hide-city');
         $map = document.getElementById('hide-map');
-        
+
         console.log($city);
         console.log($map);
         $selected = $("input[name='delivery_status']");
