@@ -156,6 +156,10 @@
 
             <!--</div>-->
 
+            @php
+                // dd($table_id);
+            @endphp
+
             <div class="StyledComponents__Unshrinkable-isMUjP dtGGjY">
 
                 <div class="Amount__Wrapper-dterOW dEARJd"><span>قيمة الطلب</span>
@@ -408,7 +412,7 @@
                     @if ($resActive == 1)
                 <button class="button primary-button" type="submit">@lang('messages.sendOrder')</button>
                 @endif
-
+<input type="hidden" name="table_id" id="table_id" value="{{$table_id == null ? 0: $table_id}}">
 
                 <a href="{{route('restaurants',$user)}}" class="custom-btn red-bc external">
                     @lang('messages.back-to-home')
@@ -481,6 +485,8 @@
                 }
 
             });
+
+
         });
     </script>
 
@@ -524,7 +530,7 @@
 
 </script>
 
-
+{{-- {{dd($table_id)}} --}}
 <script type="text/javascript">
     var map;
 
@@ -588,14 +594,18 @@
 </script>
 
 <script>
-    $(function() {
+    $(document).ready(function(){
+        // $(function() {
+            
 
         $inadd1 = document.getElementById('saturday');
         $total = document.getElementById('total');
-        
+
         $city = document.getElementById('hide-city');
         $map = document.getElementById('hide-map');
-        
+        $table = $('#table_id').val();
+        console.log($table);
+        // alert($table);
         console.log($city);
         console.log($map);
         $selected = $("input[name='delivery_status']");
@@ -611,27 +621,53 @@
         // $map.style.display='block';
         // $(".hide-all-location").hide();
 
-        $("input[name='delivery_status']").on('click', function() {
-            var selected = $("input[name='delivery_status']:checked").val();
-            if (selected == 0) {
-                console.log($city);
-                console.log($map);
-                $city.style.display='none';
-                $map.style.display='block';
-                // console.log(selected);
-                    $inadd1.style.display='block';
-                    $total.innerHTML = {{$totalPrice == null ? 0 : $totalPrice }};
-            } else {
-                $map.style.display='none';
-                $city.style.display='block';
-                $inadd1.style.display='none';
-                    {{--$total.innerHTML -=  {{$deliveryPrice}};--}}
-                    $total.innerHTML = {{$totalPrice == null ? 0 : $totalPrice}} - $del.val();
-                    // console.log(selected);
-            }
-        });
+        // alert($table);
+        if($table == 0){
+            $city.style.display='none';
 
-    });
+            $("input[name='delivery_status']").on('click', function() {
+                var selected = $("input[name='delivery_status']:checked").val();
+                if (selected == 0) {
+                    console.log($city);
+                    console.log($map);
+                    $city.style.display='none';
+                    $map.style.display='block';
+                    // console.log(selected);
+                        $inadd1.style.display='block';
+                        $total.innerHTML = {{$totalPrice == null ? 0 : $totalPrice }};
+                } else {
+                    $map.style.display='none';
+                    $city.style.display='block';
+                    $inadd1.style.display='none';
+                        {{--$total.innerHTML -=  {{$deliveryPrice}};--}}
+                        $total.innerHTML = {{$totalPrice == null ? 0 : $totalPrice}} - $del.val();
+                        // console.log(selected);
+                }
+            });
+        }else{
+            $("input[name='delivery_status']").on('click', function() {
+                var selected = $("input[name='delivery_status']:checked").val();
+                if (selected == 0) {
+                    console.log($city);
+                    console.log($map);
+                    $city.style.display='none';
+                    $map.style.display='none';
+                    // console.log(selected);
+                        $inadd1.style.display='none';
+                        $total.innerHTML = {{$totalPrice == null ? 0 : $totalPrice }};
+                } else {
+                    $map.style.display='none';
+                    $city.style.display='none';
+                    $inadd1.style.display='none';
+                        {{--$total.innerHTML -=  {{$deliveryPrice}};--}}
+                        $total.innerHTML = {{$totalPrice == null ? 0 : $totalPrice}} - $del.val();
+                        // console.log(selected);
+                }
+            });
+        }
+
+});
+    // });
 </script>
 
 

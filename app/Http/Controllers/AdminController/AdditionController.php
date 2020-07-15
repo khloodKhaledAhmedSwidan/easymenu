@@ -41,10 +41,15 @@ class AdditionController extends Controller
             'name'     => 'required',
             'name_ar'  => 'required',
             'type'     => 'required',
-            'price'    => 'required',
+            'price'    => 'sometimes',
         ]);
         $res = $request->user();
-        $res->additions()->create($request->all());
+        $res->additions()->create([
+            'name' => $request->name,
+            'name_ar' => $request->name_ar,
+            'type' => $request->type,
+            'price' => $request->price == null ? 0 : $request->price,
+        ]);
         flash('تمت الاضافة بنجاح');
         return back();
     }

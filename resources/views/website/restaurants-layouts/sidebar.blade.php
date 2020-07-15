@@ -41,7 +41,7 @@
             <li class="nav-item {{ strpos(URL::current(), 'admin/show-barcode') !== false ? 'active' : '' }}">
                 <a href="{{route('res.barcode')}}" class="nav-link ">
                     <i class="icon-settings"></i>
-                    <span class="title">استعراض مطعمي</span>
+                    <span class="title">استعراض الباركود</span>
                     <span class="arrow"></span>
                 </a>
             </li>

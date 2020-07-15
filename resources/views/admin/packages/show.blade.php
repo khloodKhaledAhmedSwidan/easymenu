@@ -19,10 +19,11 @@
                 <i class="fa fa-circle"></i>
             </li>
             <li>
-                <a href="/admin/packages">وصف الباقة</a>
-
+                <a href="/admin/packages">الباقات</a>
             </li>
-
+            <li>
+                <a >وصف الباقة</a>
+            </li>
         </ul>
     </div>
 
@@ -45,7 +46,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="portlet light ">
-
+{{-- {{dd($package->subscriptions)}} --}}
                             <form>
                                 <input type='hidden' name='_token' value='{{Session::token()}}'>
                                 <div class="portlet-body">
@@ -56,32 +57,33 @@
 
                                             <div class="form-group">
                                                 <label class="control-label"> اسم الباقة </label>
-                                                <input type="text" name="name_ar" class="form-control"
-                                                     value="{{$package->name_ar}}"/>
-
+                                                <input readonly type="text" name="name_ar" class="form-control"
+                                                    value="{{$package->name_ar}}"/>
                                             </div>
 
                                             <div class="form-group">
                                                 <label class="control-label"> وصف الباقة </label>
-                                                <input type="text" name="description_ar" class="form-control"
-                                                      value="{{$package->description_ar}}"/>
-
+                                                {{-- <input readonly type="text" name="description_ar" class="form-control"
+                                                    value="{{$package->description_ar}}"/> --}}
+                                                    <p class="form-control" aria-readonly="true" >
+                                                        {{$package->description_ar}}
+                                                    </p>
+                                            {{-- <textarea name="description_ar" class="form-control"  cols="30" rows="10">
+                                                {{$package->description_ar}}
+                                            </textarea> --}}
                                             </div>
 
-                                            <div class="form-group">
+                                            {{-- <div class="form-group">
                                                 <label class="control-label"> اسم الباقة بالانجليزية</label>
                                                 <input type="text" name="name" class="form-control"
+                                                    value="{{$package->name}}"/>
+                                            </div> --}}
 
-                                                       value="{{$package->name}}"/>
-
-                                            </div>
-
-                                            <div class="form-group">
+                                            {{-- <div class="form-group">
                                                 <label class="control-label"> وصف الباقة بالانجليزية</label>
                                                 <input type="text" name="description" class="form-control"
-                                                     value="{{$package->description}}"/>
-
-                                            </div>
+                                                    value="{{$package->description}}"/>
+                                            </div> --}}
 
                                             {{-- <div class="form-group">
                                                 <label class="control-label"> عدد مرات التثبيت للمحل </label>
@@ -96,17 +98,16 @@
 
                                             <div class="form-group">
                                                 <label class="control-label"> مدة الباقة بالشهر </label>
-                                                <input type="number" name="duration" class="form-control"
+                                                <input readonly type="number" name="duration" class="form-control"
                                                       value="{{$package->duration}}"/>
 
                                             </div>
 
-                                            <div class="form-group">
+                                            {{-- <div class="form-group">
                                                 <label class="control-label"> عدد المنتجات المتاحة </label>
                                                 <input type="number"  class="form-control"
                                                      value="{{$package->products}}"/>
-
-                                            </div>
+                                            </div> --}}
 
                                             {{-- <div class="form-group">
                                                     <label class="control-label"> عدد المنتجات المثبتة </label>
@@ -121,9 +122,8 @@
 
                                             <div class="form-group">
                                                 <label class="control-label"> سعر الباقة </label>
-                                                <input type="number" name="price" class="form-control"
+                                                <input readonly type="number" name="price" class="form-control"
                                                        value="{{$package->price}}"/>
-
                                             </div>
 
                                         </div>

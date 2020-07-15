@@ -94,8 +94,7 @@
 
                                         <div class="form-group">
                                             <label class="control-label"> سعر الاضافة </label>
-                                            <input type="number" name="price" class="form-control"
-                                                placeholder="سعر الاضافة" value="0" />
+                                            <input type="number" name="price" class="form-control" placeholder="0" />
                                             @if ($errors->has('price'))
                                             <span class="help-block">
                                                 <strong style="color: red;">{{ $errors->first('price') }}</strong>
@@ -126,5 +125,10 @@
 <script src="{{ URL::asset('admin/js/select2.full.min.js') }}"></script>
 <script src="{{ URL::asset('admin/js/components-select2.min.js') }}"></script>
 <script src="{{ URL::asset('admin/js/bootstrap-fileinput.js') }}"></script>
+<script>
+    function clear(){
+        alert('here');
+    }
+</script>
 
 @endsection

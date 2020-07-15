@@ -158,7 +158,7 @@
                     cancelButtonText: "إغلاق"
                 }, function() {
 
-                    window.location.href = "{{ url('/') }}" + "/admin/cities/"+{{$record->id}}+"/delete" ;
+                    window.location.href = "{{ url('/') }}" + "/admin/cities/"+id+"/delete" ;
 
                 });
 

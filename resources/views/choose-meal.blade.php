@@ -14,7 +14,9 @@
     <a class="back" href="{{url()->previous()}}"><i class="fas fa-arrow-right"></i></a>
     <img src="{{asset('uploads/meals/'.$meal->image)}}">
 </figure>
-
+@php
+    $subscription = $user->subscriptions()->where('status',1)->first();
+@endphp
 {{--<div class="bar dl-none">--}}
 {{--    <div class="d-flex">--}}
 {{--        <figure><img src="http://easymenu.site/uploads/categories/categories_1592409595.jpg" alt=""></figure>--}}
@@ -205,12 +207,16 @@
                 </div>
             </div>
         </div>
-        <div class="d text-center dd">
-            <button type="submit" class="button primary-button">
-                <i class="fas fa-shopping-bag"></i>
-                {{ trans('messages.add-to-cart') }}
-            </button>
-        </div>
+        {{-- {{dd($user->subscriptions()->where('status',1)->where('finished',0)->first()->id )}} --}}
+        @if ($subscription == null ? false : $subscription->package_id == 1 ? false: true )
+<div class="d text-center dd">
+    <button type="submit" class="button primary-button">
+        <i class="fas fa-shopping-bag"></i>
+        {{ trans('messages.add-to-cart') }}
+    </button>
+</div>
+@endif
+        
     </form>
 </div>
 

@@ -63,7 +63,7 @@
                             </th>
                             <th>اسم الطاولة</th>
                             <th>الباركود</th>
-                            {{-- <th>سعر الطاولة</th> --}}
+                            <th>الفرع</th>
                             <th> العمليات </th>
                         </tr>
                     </thead>
@@ -105,6 +105,7 @@
                                     </div>
                                 </div>
                             </td>
+                        <td>{{$record->branch->name_ar}}</td>
                             <td>
                                 <div class="btn-group">
                                     <button class="btn btn-xs green dropdown-toggle" type="button"

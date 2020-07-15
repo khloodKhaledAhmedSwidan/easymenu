@@ -42,10 +42,15 @@
                     <div class="navbar">
                         <div class="row">
                             <div class="col-6">
+                                @php
+                                    $subscription = $user->subscriptions()->where('status',1)->first();
+                                @endphp
+                                {{-- {{dd($subscription)}} --}}
+                                @if ($subscription == null ? false : $subscription->package_id == 1 ? false: true )
                                 <a href="{{route('get-cart',$user)}}" class="external">
                                     <i class="fas fa-shopping-cart"></i>
                                     <span>
-                                        [
+                                        [   
                                         @php
                                         $cart = session()->get('cart');
                                         if(isset($cart)){
@@ -53,9 +58,11 @@
                                         }else{
                                         $count = 0;
                                         }
-                                        @endphp {{ $count}} ]
+                                        @endphp {{ $count}} 
+                                        ]
                                     </span>
                                 </a>
+                                @endif
                             </div>
                             <div class="col-6">
                                 <div class="float-left">
