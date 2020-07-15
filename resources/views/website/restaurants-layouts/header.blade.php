@@ -173,19 +173,19 @@
             {{--</li>--}}
             <!-- END TODO DROPDOWN -->
             <!-- BEGIN USER LOGIN DROPDOWN -->
-            <li>
-                @if(app()->getLocale() == 'ar')
-                <a rel="alternate" hreflang="en"
-                    href="{{ LaravelLocalization::getLocalizedURL('en', null, [], true) }}">
-                    English
-                </a>
-                @else
-                <a rel="alternate" hreflang="ar"
-                    href="{{ LaravelLocalization::getLocalizedURL('ar', null, [], true) }}">
-                    العربية
-                </a>
-                @endif
-            </li>
+{{--            <li>--}}
+{{--                @if(app()->getLocale() == 'ar')--}}
+{{--                <a rel="alternate" hreflang="en"--}}
+{{--                    href="{{ LaravelLocalization::getLocalizedURL('en', null, [], true) }}">--}}
+{{--                    English--}}
+{{--                </a>--}}
+{{--                @else--}}
+{{--                <a rel="alternate" hreflang="ar"--}}
+{{--                    href="{{ LaravelLocalization::getLocalizedURL('ar', null, [], true) }}">--}}
+{{--                    العربية--}}
+{{--                </a>--}}
+{{--                @endif--}}
+{{--            </li>--}}
             @php
             $user = auth()->user();
             @endphp

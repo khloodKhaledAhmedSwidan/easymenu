@@ -106,10 +106,14 @@
                 <td class="no_dec"><a href="{{route('orders.show',$record->id)}}"
                         style="color: orangered;">{{ $record->name }}</a></td>
                 <td>
+                  @if($record->delivery != null)
                     @if ($record->delivery == 0)
                     توصيل للعنوان
                     @else
                     استلام من الفرع
+                    @endif
+                    @else
+                      الطلب في المطعم
                     @endif
 
                 </td>

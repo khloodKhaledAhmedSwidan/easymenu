@@ -16,7 +16,7 @@
             <a href="{{ url('admin/edit-profile') }}">@lang('messages.edit_profile')</a>
             <i class="fa fa-circle"></i>
         </li>
-  
+
         <li>
             <span>@lang('messages.change_passsword')</span>
         </li>
@@ -31,17 +31,18 @@
          class="btn btn-info {{ strpos(URL::current(), 'admin/edit-profile') !== false ? 'hide' : '' }}">
         @lang('messages.edit_profile')
         </a>
-   
+
         <a href="{{route('res.changePass')}}"
             class="btn btn-info {{ strpos(URL::current(), 'admin/change-password') !== false ? 'hide' : '' }}">
            @lang('messages.change_password')
         </a>
-    
+
     </div>
 </div>
 
 <h1 class="page-title"> @lang('messages.change_passsword') </h1>
 @include('flash::message')
+
 @endsection
 
 
@@ -62,7 +63,7 @@
                 {{Form::label('password','Password')}}
                 @endif
              <input type="password" id="password" name="password" placeholder="@lang('messages.change_passswordField')" required class="form-control"/>
-            
+
                 @if ($errors->has('password'))
                 <span class="invalid-feedback" role="alert">
                     <strong>{{ $errors->first('password') }}</strong>
@@ -77,14 +78,14 @@
                 {{Form::label('password_confirmation',' Password Confirmation ')}}
                 @endif
             <input type="password" placeholder="@lang('messages.confirm_password')" id="password_confirmation" required class="form-control" name="password_confirmation"/>
-       
+
                 @if ($errors->has('password_confirmation'))
                 <span class="invalid-feedback" role="alert">
                     <strong>{{ $errors->first('password_confirmation') }}</strong>
                 </span>
                 @endif
             </div>
-           
+
                    <div class="form-group">
                 @if (app()->getLocale() == 'ar')
                 {!! Form::submit('تعديل', ['class' => 'btn btn-primary px-1']) !!}
@@ -92,7 +93,7 @@
                 {!! Form::submit('Update', ['class' => 'btn btn-primary px-1']) !!}
                 @endif
             </div>
-          
+
                 {!!Form::close()!!}
 
             </div>

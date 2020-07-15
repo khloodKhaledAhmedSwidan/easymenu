@@ -101,7 +101,7 @@
                         <div class="form-check">
                             <div class="form-check-label">
                                 <label class="radio">
-                                    <input type="radio" class="form-input" onchange="sizeOp({{$meal->id}},0,{{$meal->price}})" name="size_id" value="0" id="size-{{$meal->id}}-{{0}}" data-price="0">
+                                    <input type="radio" class="form-input" onchange="sizeOp({{$meal->id}},0,{{$meal->price}})"  name="size_id" value="0" id="size-{{$meal->id}}-{{0}}" data-price="0">
                                     <span class="checkmark"></span>
                                     {{app()->getLocale() == 'ar' ? 'بدون احجام' : 'default size'}}-{{(0)}}
                                 </label>
@@ -182,7 +182,7 @@
                             <div class="stepper stepper-small stepper-init">
                                 <div onclick="reduce({{$meal->id}},{{$meal->price}})" class="stepper-button-minus"><i class="fas fa-minus"></i></div>
                                 <div class="stepper-input-wrap">
-                                    <input value="1" id="quantity-{{$meal->id}}" class="form-control" type="text" name="quantity">
+                                    <input value="1" id="quantity-{{$meal->id}}" class="form-control" type="text"  name="quantity">
 
                                 </div>
                                 <div class="stepper-button-plus" onclick="add({{$meal->id}},{{$meal->price}})"><i class="fas fa-plus"></i></div>
@@ -262,23 +262,49 @@
     function sizeOp(meal_id, size_id, price) {
 
         var oldValue = Number.parseInt($("#sizePrice-" + meal_id + "").val());
+        console.log("oldValue" + oldValue);
         var sizePrice = $("input:radio[name=size_id]:checked").data('price');
+        console.log("sizePrice" + sizePrice);
         var sizeQuan = Number.parseInt($('#quantity-' + meal_id + '').val());
-
+        console.log("sizeQuan" + sizeQuan);
         var addPrices = [];
-        $("input[name='more_additions[]']:checked").each(function() {
+        {{--if (sizePrice == 0) {--}}
+        {{--    console.log("here");--}}
+        {{--    $("input[name='more_additions[]']:checked").each(function () {--}}
+        {{--        addPrices.push($(this).data('price'));--}}
+        {{--    });--}}
+        {{--    console.log("addPrices" + addPrices);--}}
+        {{--    var totalAddPrices = addPrices.reduce(function (a, b) {--}}
+        {{--        return a + b;--}}
+        {{--    }, 0);--}}
+
+        {{--    console.log("totalAddPrices" + totalAddPrices);--}}
+        {{--    var check = price + ((sizePrice + totalAddPrices) * sizeQuan);--}}
+
+
+        {{--    var result = check + "{{app()->getLocale() == 'ar' ? ' ر.س ' : ' SAR '}}";--}}
+
+        {{--    $("#sizePrice-" + meal_id + "").val(result);--}}
+        {{--    $("#totalFromPopUp-" + meal_id + "").val(check);--}}
+        {{--} else {--}}
+
+        $("input[name='more_additions[]']:checked").each(function () {
             addPrices.push($(this).data('price'));
         });
-        var totalAddPrices = addPrices.reduce(function(a, b) {
+
+        var totalAddPrices = addPrices.reduce(function (a, b) {
             return a + b;
         }, 0);
 
         var check = price + ((sizePrice + totalAddPrices) * sizeQuan);
+
         var result = check + "{{app()->getLocale() == 'ar' ? ' ر.س ' : ' SAR '}}";
+
         $("#sizePrice-" + meal_id + "").val(result);
         $("#totalFromPopUp-" + meal_id + "").val(check);
-
+    // }
     }
+
 
     function test(meal_id, addition_id) {
         var tes = $("#sub_add" + meal_id + "-" + addition_id + "").prop('checked');

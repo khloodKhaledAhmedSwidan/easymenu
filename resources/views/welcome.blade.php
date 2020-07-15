@@ -40,7 +40,7 @@
         </div>
         <div class="categories">
             <div class="container">
-                <div class="row">               
+                <div class="row">
 
                     @foreach ($user->categories as $item)
                     <div class="col-lg-4 col-6">

@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Package;
 use App\User;
 use App\Http\Controllers\Controller;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -50,6 +52,7 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
+//        dd('kk');
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
             'name_ar' => ['required', 'string', 'max:255'],
@@ -68,7 +71,10 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        $packageDuration =Package::find(1)->duration;
+        $now =Carbon::now('m');
+        $end=   $now->addMonths($packageDuration);
+    $user =  User::create([
             'name' => $data['name'],
             'name_ar' => $data['name_ar'],
             'email' => $data['email'],
@@ -77,5 +83,13 @@ class RegisterController extends Controller
             'active' => '0',
             // 'image' => $data['image'] == null ? null : UploadImage($data['image'], 'image', '/uploads/users'),
         ]);
+        $user->subscriptions()->create(
+            [
+                'package_id' => 1,
+                'status' =>1,
+                'end_at' => $end,
+            ]);
+
+        return $user;
     }
 }

@@ -12,7 +12,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use DB;
 use Auth;
-
+use Carbon\Carbon;
 use Image;
 use Illuminate\Support\Facades\Storage;
 
@@ -51,6 +51,10 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
+        $packageDuration =Package::find(1)->duration;
+$now =Carbon::now('m');
+     $end=   $now->addMonths($packageDuration);
+
         $this->validate($request, [
             // 'phone_number'          => 'required|unique:users',
             'name' => 'required|max:255|unique:users',
@@ -76,7 +80,10 @@ class UserController extends Controller
         $user->subscriptions()->create(
             [
                 'package_id' => 1,
+                'status' =>1,
+                'end_at' => $end,
             ]);
+
         flash('تم اضافة بيانات المطعم');
         return redirect('admin/users');
     }
