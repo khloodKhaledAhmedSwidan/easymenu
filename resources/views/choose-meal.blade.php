@@ -216,7 +216,7 @@
     </button>
 </div>
 @endif
-        
+
     </form>
 </div>
 
@@ -259,6 +259,39 @@
 
 
 
+    {{--function sizeOp(meal_id, size_id, price) {--}}
+
+
+    {{--    var oldValue = Number.parseInt($("#sizePrice-" + meal_id + "").val());--}}
+    {{--    console.log("oldValue" + oldValue);--}}
+    {{--    var sizePrice = $("input:radio[name=size_id]:checked").data('price');--}}
+    {{--    console.log("sizePrice" + sizePrice);--}}
+    {{--    var sizeQuan = Number.parseInt($('#quantity-' + meal_id + '').val());--}}
+    {{--    console.log("sizeQuan" + sizeQuan);--}}
+    {{--    var addPrices = [];--}}
+
+    {{--    $("input[name='more_additions[]']:checked").each(function () {--}}
+    {{--        addPrices.push($(this).data('price'));--}}
+    {{--    });--}}
+
+    {{--    var totalAddPrices = addPrices.reduce(function (a, b) {--}}
+    {{--        return a + b;--}}
+    {{--    }, 0);--}}
+    {{--    console.log(" totalAddPrices" +  totalAddPrices);--}}
+
+    {{--        var check = price + ((sizePrice + totalAddPrices) * sizeQuan);--}}
+    {{--        console.log("check"+check);--}}
+    {{--        var result = check + "{{app()->getLocale() == 'ar' ? ' ر.س ' : ' SAR '}}";--}}
+
+    {{--        $("#sizePrice-" + meal_id + "").val(result);--}}
+    {{--        $("#totalFromPopUp-" + meal_id + "").val(check);--}}
+
+
+    {{--}--}}
+
+
+
+
     function sizeOp(meal_id, size_id, price) {
 
         var oldValue = Number.parseInt($("#sizePrice-" + meal_id + "").val());
@@ -296,7 +329,11 @@
             return a + b;
         }, 0);
         console.log(" totalAddPrices" +  totalAddPrices);
+<<<<<<< HEAD
         var sizePlusTotal = (sizePrice + totalAddPrices);
+=======
+    var sizePlusTotal = sizePrice+ totalAddPrices;
+>>>>>>> thurs
         if(sizePlusTotal == 0 ) {
             var check = price  * sizeQuan;
             console.log("check"+check);
@@ -306,6 +343,7 @@
             $("#totalFromPopUp-" + meal_id + "").val(check);
         }else{
         var check = (price + (sizePrice + totalAddPrices) * sizeQuan);
+
             console.log("check"+check);
             var result = check + "{{app()->getLocale() == 'ar' ? ' ر.س ' : ' SAR '}}";
 
@@ -317,6 +355,7 @@
         {{--$("#sizePrice-" + meal_id + "").val(result);--}}
         {{--$("#totalFromPopUp-" + meal_id + "").val(check);--}}
         // }
+
     }
 
 
