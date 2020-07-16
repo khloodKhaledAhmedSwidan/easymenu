@@ -7,6 +7,7 @@ use App\Contact;
 use App\Cart;
 use App\Meal;
 use App\Order;
+use App\Package;
 use App\User;
 use App\Size;
 use App\Table;
@@ -56,7 +57,7 @@ class HomeController extends Controller
         }
         Session::forget('cart');
         // $cities = $user->where('type',0)->cities()->pluck('name','id')->get();
-  
+
         return view('welcome', compact('user', 'resActive'));
     }
 
@@ -111,7 +112,7 @@ class HomeController extends Controller
 
         $oldCart = Session::get('cart');
         $cart = new Cart($oldCart);
-        
+
         $totalPrice = $cart == null ?0 :$cart->totalPrice;
 
         if ($cart->items == null) {
@@ -168,19 +169,17 @@ class HomeController extends Controller
 
     public function splash()
     {
-        return view('splash');
+        $packages= Package::all();
+        return view('splash',compact('packages'));
     }
 
-    public function packages()
-    {
-        return view('packages');
-    }
+
 
     public function categoryProducts(User $user, $id)
-    { 
+    {
         $products = $user->meals()->where('category_id', $id)->get();
         $sizes = Size::all();
-    
+
         $category = $user->categories()->where('id',$id)->first();
         return view('products', compact('user', 'products','category'));
     }
@@ -188,7 +187,7 @@ class HomeController extends Controller
     public function showProduct(User $user, $id)
     {
         $meal = Meal::find($id);
-        
+
         return view('product-details', compact('meal', 'user'));
     }
 
@@ -308,7 +307,7 @@ class HomeController extends Controller
     public function updateProfile(Request $request)
     {
         //|starts_with:966
-   
+
         $this->validate($request, [
             'name_ar' => 'required',
             'name' => 'required',
@@ -340,36 +339,36 @@ class HomeController extends Controller
 //            $user->save();
 //        }
 
-    
+
                      $user->update([
             'image' => $request->file('image') == null ? $user->image : UploadImage($request->file('image'), 'image', '/uploads/users'),
         ]);
         flash('تم التعديل بنجاح')->success();
         return back();
     }
-  
-    
+
+
     public function changePasswordPage(){
        $model = auth()->user();
         return view('website.users.change_password', compact('model'));
     }
     public function changePassword(Request $request){
-       
-        
+
+
         $this->validate($request, [
-     
+
             'password' => 'min:8|nullable|confirmed',
             'password_confirmation' => 'required_with:passowrd',
-            
+
         ]);
 
             auth()->user()->update([
                 'password' => Hash::make($request->password)
             ]);
             flash('تم التعديل بنجاح')->success();
-     
+
             return back();
-    
+
     }
        public function barcodeRes(){
        $model = auth()->user();

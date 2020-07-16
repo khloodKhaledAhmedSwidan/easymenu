@@ -4,8 +4,7 @@
 Route::redirect('', '/ar');
 Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
     Route::get('/', 'HomeController@splash');
-    Route::get('/packages', 'HomeController@packages');
-
+    Route::get('/packages', 'website\UserController@packages');
     Auth::routes();
     // Route::get('/login/{branch}', 'Auth\LoginController@showBranchLogin');
     //  Route::post('/login/{branch}', 'Auth\LoginController@branchLogin');
@@ -20,8 +19,11 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
     Route::get('/restaurants/{user}/categories/{id}', 'HomeController@categoryProducts')->name('cat-products');
     Route::get('/restaurants/{user}/products/{id}', 'HomeController@showProduct')->name('products.show');
     Route::get('/restaurants/{user}/meal/{id}', 'HomeController@chooseProduct')->name('choose-meal');
-    
+//    Route::get('/nour/subscribe/{$id}','HomeController@choosePackage')->name('choose_package');
+
     Route::get('/restaurant/cart/{user}', 'HomeController@getCart')->name('get-cart');
+    Route::get('/subscribe/{id}', 'website\UserController@chooseProduct')->name('choose_package');
+    Route::post('/subscribe/{id}', 'website\UserController@coponesProduct')->name('copones_package');
     // Route::get('/restaurants/cart/{user}', 'HomeController@getCart')->name('get-cart');
     Route::post('/meal/{id}/add-to-cart', 'website\CartController@addToCart')->name('add-to-cart');
     Route::GET('/meal/{id}/delete-from-cart', 'website\CartController@remove')->name('cart.remove');
