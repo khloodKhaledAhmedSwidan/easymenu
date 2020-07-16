@@ -295,15 +295,30 @@
         var totalAddPrices = addPrices.reduce(function (a, b) {
             return a + b;
         }, 0);
+        console.log(" totalAddPrices" +  totalAddPrices);
+        var sizePlusTotal = (sizePrice + totalAddPrices);
+        if(sizePlusTotal == 0 ) {
+            var check = price  * sizeQuan;
+            console.log("check"+check);
+            var result = check + "{{app()->getLocale() == 'ar' ? ' ر.س ' : ' SAR '}}";
 
-        var check = price + ((sizePrice + totalAddPrices) * sizeQuan);
+            $("#sizePrice-" + meal_id + "").val(result);
+            $("#totalFromPopUp-" + meal_id + "").val(check);
+        }else{
+        var check = (price + (sizePrice + totalAddPrices) * sizeQuan);
+            console.log("check"+check);
+            var result = check + "{{app()->getLocale() == 'ar' ? ' ر.س ' : ' SAR '}}";
 
-        var result = check + "{{app()->getLocale() == 'ar' ? ' ر.س ' : ' SAR '}}";
+            $("#sizePrice-" + meal_id + "").val(result);
+            $("#totalFromPopUp-" + meal_id + "").val(check);
+        }
+        {{--var result = check + "{{app()->getLocale() == 'ar' ? ' ر.س ' : ' SAR '}}";--}}
 
-        $("#sizePrice-" + meal_id + "").val(result);
-        $("#totalFromPopUp-" + meal_id + "").val(check);
-    // }
+        {{--$("#sizePrice-" + meal_id + "").val(result);--}}
+        {{--$("#totalFromPopUp-" + meal_id + "").val(check);--}}
+        // }
     }
+
 
 
     function test(meal_id, addition_id) {

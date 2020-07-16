@@ -367,12 +367,13 @@ class HomeController extends Controller
                 'password' => Hash::make($request->password)
             ]);
             flash('تم التعديل بنجاح')->success();
-     
+    
             return back();
     
     }
-       public function barcodeRes(){
-       $model = auth()->user();
+
+    public function barcodeRes(){
+        $model = auth()->user();
         return view('website.users.barcode', compact('model'));
     }
 //     public function branchMeals(Request $request, User $user){

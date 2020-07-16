@@ -105,10 +105,10 @@ class User extends Authenticatable
         return $this->hasMany(Slider::class, 'restaurant_id');
     }
 
-    // public function branches()
-    // {
-    //     return $this->hasMany(Branch::class, 'user_id');
-    // }
+    public function branches()
+    {
+        return $this->hasMany(Branch::class, 'user_id');
+    }
 
     public function shifts()
     {

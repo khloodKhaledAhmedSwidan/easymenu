@@ -18,7 +18,10 @@ class BranchController extends Controller
     {
         $records = User::where('restaurant_id', auth()->user()->id)->get();
         $branchs = auth()->user()->restaurantBranches;
-        return view('admin.branches.index', compact('records', 'branchs'));
+        $package = auth()->user()->subscriptions()->where('status',1)->where('finished',0)->first();
+        $pack = $package == null ? false : $package->package_id == 2 ? true : false; 
+        // dd($pack);
+        return view('admin.branches.index', compact('records', 'branchs','pack'));
     }
 
     /**
@@ -28,14 +31,17 @@ class BranchController extends Controller
      */
     public function create()
     {
-        $branchs = auth()->user()->branchOrders;
-        // $created = auth()->user()->branches()->count();
-        // if ($created < $branchs) {
+        $branchs = auth()->user()->branchs;
+        $created = auth()->user()->branches()->count();
+        
+        // dd($branchs,$created);
+        if ($created < $branchs) {
+
             return view('admin.branches.create');
-        // } else {
-        //     flash('لقد اضفت الحد الاقصي من الفروع')->error();
-        //     return back();
-        // }
+        } else {
+            flash('لقد اضفت الحد الاقصي من الفروع')->error();
+            return back();
+        }
     }
 
     /**

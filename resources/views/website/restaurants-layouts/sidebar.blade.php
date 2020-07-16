@@ -45,13 +45,32 @@
                     <span class="arrow"></span>
                 </a>
             </li>
-            <li class="nav-item {{ strpos(URL::current(), 'admin/cities') !== false ? 'active' : '' }}">
-                <a href="{{route('cities.index')}}" class="nav-link ">
+
+            @php
+                $subscription = auth()->user()->subscriptions()->where('status',1)->where('finished',0)->first();
+                $check = $subscription == null ? true : $subscription->package_id ;//== 1 ? true : false;
+                // dd($check);
+                if($check == 2){
+                    $res = $subscription->user;
+                    $res->branchs = 4;
+                    $res->save();
+                    // dd($res);
+                }else{
+                    $res = $subscription->user;
+                    $res->branchs = 99;
+                    $res->save();
+                }
+            @endphp
+@if ($check != 1)
+    
+<li class="nav-item {{ strpos(URL::current(), 'admin/cities') !== false ? 'active' : '' }}">
+    <a href="{{route('cities.index')}}" class="nav-link ">
                     <i class="icon-settings"></i>
                     <span class="title">المدن</span>
                     <span class="arrow"></span>
                 </a>
             </li>
+            
             <li class="nav-item {{ strpos(URL::current(), 'admin/branches') !== false ? 'active' : '' }}">
                 <a href="{{route('branches.index')}}" class="nav-link ">
                     <i class="icon-settings"></i>
@@ -66,6 +85,7 @@
                     </li>
                 </ul> --}}
             </li>
+@endif
 
             <li class="nav-item {{ strpos(URL::current(), 'admin/shifts') !== false ? 'active' : '' }}">
                 <a href="{{route('shifts.index')}}" class="nav-link ">
@@ -127,6 +147,7 @@
                 </ul> --}}
             </li>
             
+            @if ($check != 1)
             <li class="nav-item {{ strpos(URL::current(), 'admin/tables') !== false ? 'active' : '' }}">
                 <a href="{{route('tables.index')}}" class="nav-link ">
                     <i class="icon-settings"></i>
@@ -141,6 +162,7 @@
                     </li>
                 </ul> --}}
             </li>
+            @endif
 
             <li class="nav-item {{ strpos(URL::current(), 'admin/sliders') !== false ? 'active' : '' }}">
                 <a href="{{route('sliders.index')}}" class="nav-link ">

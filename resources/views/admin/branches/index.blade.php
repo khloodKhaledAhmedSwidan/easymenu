@@ -52,11 +52,14 @@
 
                     </div>
                 </div>
-                <!-- <div class="row">
+                {{-- {{dd($pack)}} --}}
+                @if($pack)
+                <div class="row">
                     <div class="text-center">
-                        <h5>متاح لك {{$branchs}} فروع\فرع</h5>
+                        <h5>متاح لك 4 فروع</h5>
                     </div>
-                </div> -->
+                </div> 
+                @endif
                 <table class="table table-striped table-bordered table-hover table-checkable order-column"
                     id="sample_1">
                     <thead>
@@ -70,7 +73,7 @@
 
                         @foreach( $records as $record )
                         <tr class="odd gradeX">
-                            <td>{{$loop->iteration}}</td>
+                            <td>{{$record->id}}</td>
                             <td class="no_dec">{{ $record->name_ar}}</td>
                             <td>
 

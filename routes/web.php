@@ -86,7 +86,7 @@ Route::group(['middleware'=>['restaurant']],function(){
 
 
 Route::get('/change-password', 'HomeController@changePasswordPage')->name('res.changePass');
-     Route::post('/change-password', 'HomeController@changePassword');
+    Route::post('/change-password', 'HomeController@changePassword');
     Route::get('/show-barcode', 'HomeController@barcodeRes')->name('res.barcode');
 
     route::get('cities/{id}/delete', 'AdminController\CityController@destroy');

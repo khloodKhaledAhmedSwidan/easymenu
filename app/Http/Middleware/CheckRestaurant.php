@@ -18,6 +18,9 @@ class CheckRestaurant
         if(auth()->user()->type == 0){
             return $next($request);
           }
+          // elseif(auth()->user()->type == 1 && auth()->user()->active == 1){
+          //   return $next($request);
+          // }
 
             return redirect()->route('orders.index');
     }
