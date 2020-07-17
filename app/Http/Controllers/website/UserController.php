@@ -10,19 +10,9 @@ use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
-    public function packages()
-    {
-        $packages= Package::all();
-        return view('packages',compact('packages'));
-    }
-    public function chooseProduct ($id){
-        $package = Package::find($id);
-//        dd($package);
-        return view('subscripe-package',compact('package'));
-    }
-    public function coponesProduct(Request $request){
-        dd($request->all());
-    }
+
+
+
     public function store(Request $request)
     {
         $this->validate($request, [

@@ -4,7 +4,7 @@
 Route::redirect('', '/ar');
 Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
     Route::get('/', 'HomeController@splash');
-    Route::get('/packages', 'website\UserController@packages');
+    Route::get('/packages', 'website\PackageController@packages');
     Auth::routes();
     // Route::get('/login/{branch}', 'Auth\LoginController@showBranchLogin');
     //  Route::post('/login/{branch}', 'Auth\LoginController@branchLogin');
@@ -22,9 +22,11 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
 //    Route::get('/nour/subscribe/{$id}','HomeController@choosePackage')->name('choose_package');
 
     Route::get('/restaurant/cart/{user}', 'HomeController@getCart')->name('get-cart');
-    Route::get('/subscribe/{id}', 'website\UserController@chooseProduct')->name('choose_package');
-    Route::post('/subscribe/{id}', 'website\UserController@coponesProduct')->name('copones_package');
+    Route::get('/subscribe/{id}', 'website\PackageController@chooseProduct')->name('choose_package');
+//    Route::post('/subscribe/{id}', 'website\PackageController@coponesProduct')->name('copones_package');
+
     // Route::get('/restaurants/cart/{user}', 'HomeController@getCart')->name('get-cart');
+    Route::post('/check/coupon', 'website\PackageController@checkCoupon')->name('check_coupon');
     Route::post('/meal/{id}/add-to-cart', 'website\CartController@addToCart')->name('add-to-cart');
     Route::GET('/meal/{id}/delete-from-cart', 'website\CartController@remove')->name('cart.remove');
 
