@@ -59,20 +59,39 @@
     </div>
 
 </form>
-                        <form role="form" action="" method="post">
-                            <input type='hidden' name='_token' value='{{Session::token()}}'>
+
                             <div class="portlet-body">
 
                                 <div class="tab-content">
                                     <!-- PERSONAL INFO TAB -->
                                     <div class="tab-pane active" id="tab_1_1">
 
-
-                                        <form method="post">
-                                            @csrf
+<hr/>
+                                        <form>
                                             <div class="form-group">
-                                                <label class="control-label"> اكتب coupon</label>
-                                                <input type="text" id="coupon" name="coupons" class="form-control"
+                                                <label class="control-label"> اكتب الايميل </label>
+                                                <input type="email" id="restEmail" name="email" class="form-control"
+                                                       placeholder="اكتب الايميل" required />
+                                                @if ($errors->has('email'))
+                                                    <span class="help-block">
+                                                <strong style="color: red;">{{ $errors->first('email') }}</strong>
+                                            </span>
+                                                @endif
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label"> اكتب كود الاحاله </label>
+                                                <input type="text" id="sellerCode" name="sellerCode" class="form-control"
+                                                       placeholder="اكتب كود الاحاله" required />
+                                                @if ($errors->has('sellerCode'))
+                                                    <span class="help-block">
+                                                <strong style="color: red;">{{ $errors->first('sellerCode') }}</strong>
+                                            </span>
+                                                @endif
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label class="control-label"> اكتب الخصم ان وجد</label>
+                                                <input type="text" id="coupon" name="coupon" class="form-control"
                                                        placeholder=" اكتب الخصم إن وجد" />
                                                 @if ($errors->has('coupon'))
                                                     <span class="help-block">
@@ -81,72 +100,38 @@
                                                 @endif
                                             </div>
                                             <div class="form-actions">
-                                                <input type="submit" id="checkCoupon" value="حفظ" class="btn btn green">
+                                                <input type="submit" id="checkCoupon" value="حفظ" class="btn btn-info">
 
                                             </div>
                                         </form>
 
+<form  id="formForPay">
+    <label class="radio-inline"><input type="radio" name="payment"  id="payByBank" value="byBank">الدفع عن طريق البنك</label><br>
+    <label class="radio-inline"><input type="radio" name="payment" id="payInvoice" value="byInvoice">ماي فاتورة</label>
+</form>
 
 
-
+                                        <!-- Modal -->
+                                        <div class="modal fade" id="getCodeModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog modal-lg">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                        <h4 class="modal-title" id="myModalLabel"> API CODE </h4>
+                                                    </div>
+                                                    <div class="modal-body" id="getCode" style="overflow-x: scroll;">
+                                                        //ajax success content here.
+                                                        // هرفع الصورة
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-
-                        </form>
-
-
-
-
-
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap">Open modal for @getbootstrap</button>
-
-                        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">New message</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <form>
-                                            <div class="form-group">
-                                                <label for="emailRest" class="col-form-label">ادخل الايميل الخاص بمطعمك </label>
-                                                <input type="email" class="form-control" id="emailRest">
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="percentage" class="col-form-label">اكتب الخصم ان وجد</label>
-                                                <input type="text" class="form-control" id="percentage">
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="percentage" class="col-form-label">اكتب كود الإحالة</label>
-                                                <input type="text" class="form-control" id="percentage">
-                                            </div>
-                                            <div class="custom-control custom-radio">
-                                                <input type="radio" class="custom-control-input" id="PayByBankChecked" name="PayByBank" checked>
-                                                <label class="custom-control-label" for="PayByBank">الدفع عن طريق البنك </label>
-                                            </div>
-
-
-                                        </form>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                        <button type="button"  class="btn btn-primary">ارسال طلب الاشتراك</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
 
                     </div>
                 </div>
-
-
-
-
 
 
 
@@ -157,26 +142,34 @@
 <script type="text/javascript" src="{{asset('js/app.js')}}"></script>
 <script type="text/javascript">
     $(document).ready(function () {
+        $('#formForPay').hide();
+
 $('#checkCoupon').on('click',function () {
     var coupon = $('#coupon').val();
-    console.log(coupon);
+    var email = $('#restEmail').val();
+    var sellerCode = $('#sellerCode').val();
+    console.log(coupon + "" + email+"" +sellerCode);
     $.ajax({
-        url:"{{route('check_coupon')}}",
-        data:{coupon:coupon},
-        type:'POST',
+        url:"{{route('restaurant_subscribe',$package->id)}}",
+        data: {
+            "_token": "{{ csrf_token() }}",
+            coupon:coupon,
+            email:email,
+            sellerCode:sellerCode
+        },
+        type: "POST",
         dataType: 'json',
         success:function (data) {
-
-            $('#exampleModal').on('show.bs.modal', function (event) {
-                var button = $(event.relatedTarget) // Button that triggered the modal
-                var recipient = button.data('whatever') // Extract info from data-* attributes
-                // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
-                // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
-                var modal = $(this)
-                modal.find('.modal-title').text('New message to ' + recipient)
-                modal.find('.modal-body input').val(recipient)
-            })
-
+console.log(data);
+            $('#formForPay').show();
+            var payByBank = $("input[name='payment']:checked").val();
+            var payInvoice = $("input[name='payment']:checked").val();
+            if(payByBank){
+                $("#getCodeModal").modal("toggle");
+                $("#getCode").html(msg);
+            }else{
+                ////////////////////////
+            }
         }
     });
 });

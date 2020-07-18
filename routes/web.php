@@ -23,7 +23,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
 
     Route::get('/restaurant/cart/{user}', 'HomeController@getCart')->name('get-cart');
     Route::get('/subscribe/{id}', 'website\PackageController@chooseProduct')->name('choose_package');
-//    Route::post('/subscribe/{id}', 'website\PackageController@coponesProduct')->name('copones_package');
+    Route::post('/subscribe/{id}', 'website\PackageController@restaurantSubscribe')->name('restaurant_subscribe');
 
     // Route::get('/restaurants/cart/{user}', 'HomeController@getCart')->name('get-cart');
     Route::post('/check/coupon', 'website\PackageController@checkCoupon')->name('check_coupon');
