@@ -25,7 +25,7 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-10 text-center" style="margin:auto;">
+        <div class="col-sm-10 text-center" style="margin:auto;">
             @include('flash::message')
         </div>
     </div>

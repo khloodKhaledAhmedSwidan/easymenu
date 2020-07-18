@@ -58,7 +58,7 @@
 
                                         <div class="form-group">
                                             <label class="control-label"> هاتف الفرع </label>
-                                            <input type="text" name="phone_number" class="form-control"
+                                            <input type="number" name="phone_number" class="form-control"
                                                 placeholder="هاتف الفرع" />
                                             <strong> يجب ان يكون الهاتف بصيغة +96600000000</strong>
                                             @if ($errors->has('phone_number'))
@@ -70,15 +70,15 @@
 
                                         <div class="form-group">
                                             <label class="control-label"> إيميل الفرع </label>
-                                            <input type="text" name="email" class="form-control"
-                                                placeholder="إيميل الفرع" />                         
+                                            <input type="email" name="email" class="form-control"
+                                                placeholder="إيميل الفرع" />
                                             @if ($errors->has('email'))
                                             <span class="help-block">
                                                 <strong style="color: red;">{{ $errors->first('email') }}</strong>
                                             </span>
                                             @endif
                                         </div>
-                                   
+
 
                                         <div class="form-group">
                                             <label class="control-label"> اسم الفرع</label>
@@ -100,7 +100,7 @@
                                             </span>
                                             @endif
                                         </div>
-                               
+
                                           <div class="form-group">
                                             <label>المدن</label>
                                             {!! Form::select('city_id',

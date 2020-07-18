@@ -236,7 +236,7 @@
             <div class="input-group">
                 <input autocomplete="off"
                     class="form-control ng-untouched {{ $errors->has('email') ? ' is-invalid' : '' }} ng-pristine ng-invalid"
-                    id="userName" maxlength="50" name="phone_number" type="text" placeholder=" رقم الهاتف " />
+                    id="userName" maxlength="50" name="phone_number" type="number" placeholder=" رقم الهاتف " />
                 @error('phone_number')
                 <span class="invalid-feedback" role="alert">
                     <strong style="color:red;">{{ $message }}</strong>

@@ -329,11 +329,10 @@
             return a + b;
         }, 0);
         console.log(" totalAddPrices" +  totalAddPrices);
-<<<<<<< HEAD
-        var sizePlusTotal = (sizePrice + totalAddPrices);
-=======
+
+
     var sizePlusTotal = sizePrice+ totalAddPrices;
->>>>>>> thurs
+
         if(sizePlusTotal == 0 ) {
             var check = price  * sizeQuan;
             console.log("check"+check);
